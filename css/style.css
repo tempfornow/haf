@@ -2,34 +2,61 @@
 	box-sizing: border-box;
 }
 
-navbar {
+body {
+    font-family: 'Arial';
+    font-size: 12px;
+	margin: 0 auto;
 	
 }
 
-right-buttons-group {
+.navbar {
+	position:fixed;
+	display: block;
+	z-index: 1;
+	top:0;
+	width:100%;
+	background-color:#2B3840;
+}
+
+.right-buttons-group {
+	float:right;
+	position:relative;
+	right: 1em;
+	top:1em
+}
+
+.logo {
+	float:right;
+	position:relative;
+	right:0;
+	
+}
+.left-buttons-group {
+	float:left;
+	position:relative;
+	left: 1em;
+	top:1em;
+}
+
+.right-button {
 	
 }
 
-left-buttons-group {
+.left-button {
 	
 }
 
-right-button {
+.main {
+	position: relative;
+	width: 33%;
+	margin: 0 auto;
+	top: 7em;
+}
+
+.login-field-label {
 	
 }
 
-left-button {
-	
-}
-
-main {
-	
-}
-
-login-field-label {
-	
-}
-
-login-button {
+.login-button {
 	
 }
