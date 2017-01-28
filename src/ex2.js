@@ -32,7 +32,8 @@ function unmarkLabel(labelId) {
 	document.getElementById(labelId).style.color = VALID_COLOR
 }
 
-
+// Checks validity of username an password and
+// returns errors list(empty if everything is valid)
 function verify(username, pass) {
 	var errors = []
 	
@@ -70,6 +71,9 @@ function clearErrors() {
 	unmarkLabel(PASSWORD_LABEL_ID)
 }
 
+// Activated when login button is pressed
+// checks the validity of username and password fields
+// and altering the ui respectively
 function login(){
 	clearErrors()
 	
