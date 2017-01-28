@@ -2,14 +2,19 @@
 const ERR_COLOR = "red"
 const VALID_COLOR = "black"
 
+const MIN_PASSWORD_LEN = 8
+const USERNAME_LABEL_ID = "username-label"
+const LOGIN_FORM_ID = "login-form"
+const PASSWORD_LABEL_ID = "password-label"
+const USERNAME_INPUT_ID = "username"
+const PASSWORD_INPUT_ID = "password"
 
 function hideLoginForm() {
-	document.getElementById("login-form").style.visibility = "hidden"
+	document.getElementById(LOGIN_FORM_ID).style.visibility = "hidden"
 }
 
-
 function isValidPassword(pass) {
-	return pass.length >= 8 && !pass.includes(" ")
+	return pass.length >= MIN_PASSWORD_LEN && !pass.includes(" ")
 }
 
 function isValidUsername(username) {
@@ -30,14 +35,14 @@ function verify(username, pass) {
 	var err = ""
 	
 	if(!isValidUsername(username)) {
-		markLabel("username-label");
+		markLabel(USERNAME_LABEL_ID);
 		err += "*Invalid username format: \
 			username should should contain only\
 			small latters,digits,dash and lodash"
 	}
 	
 	if(!isValidPassword(pass)) {
-		markLabel("password-label");
+		markLabel(PASSWORD_LABEL_ID);
 		err += "*Invalid password format - password \
 			should contain at least 8 characters \
 			and no backspace characters"
@@ -47,24 +52,25 @@ function verify(username, pass) {
 }
 
 function setErr(err) {
-	document.getElementById("errors").innerHTML = "<font color=\"red\">" + err + "</font>"
+	document.getElementById("errors").innerHTML = 
+		"<font color=\"red\">" + err + "</font>"
 }
 
 function clearErrors() {
 	setErr("")
-	unmarkLabel("username-label")
-	unmarkLabel("password-label")
+	unmarkLabel(USERNAME_LABEL_ID)
+	unmarkLabel(PASSWORD_LABEL_ID)
 }
 
 function login(){
-	clearErrors();
+	clearErrors()
 	
-	var username = document.getElementById("username").value
-	var pass = document.getElementById("password").value
+	var username = document.getElementById(USERNAME_INPUT_ID).value
+	var pass = document.getElementById(PASSWORD_INPUT_ID).value
 	
 	var err = verify(username, pass)
 	if(!err) {
-		document.getElementById("login-form").innerHTML="<h1>success</h1>"
+		document.getElementById(LOGIN_FORM_ID).innerHTML="<h1>success</h1>"
 	} else {
 		setErr(err)
 	}	
