@@ -8,6 +8,7 @@ const LOGIN_FORM_ID = 'login-form'
 const PASSWORD_LABEL_ID = 'password-label'
 const USERNAME_INPUT_ID = 'username'
 const PASSWORD_INPUT_ID = 'password'
+const ERRORS_SECTION_ID = 'errors'
 
 function hideLoginForm() {
 	document.getElementById(LOGIN_FORM_ID).style.visibility = 'hidden'
@@ -33,32 +34,38 @@ function unmarkLabel(labelId) {
 
 
 function verify(username, pass) {
-	var err = ''
+	var errors = []
 	
 	if(!isValidUsername(username)) {
 		markLabel(USERNAME_LABEL_ID);
-		err += '*Invalid username format: \
+		errors.push('*Invalid username format: \
 			username should should contain only\
-			small latters,digits,dash and lodash'
+			small latters,digits,dash and lodash')
 	}
 	
 	if(!isValidPassword(pass)) {
 		markLabel(PASSWORD_LABEL_ID);
-		err += '*Invalid password format - password \
+		errors.push('*Invalid password format - password \
 			should contain at least 8 characters \
-			and no backspace characters'
+			and no backspace characters')
 	}
 	
-	return err;
+	return errors;
 }
 
-function setErr(err) {
-	document.getElementById('errors').innerHTML = 
-		'<font color=\"red\">' + err + '</font>'
+function setErr(errors) {
+	// Clear errors section
+	document.getElementById(ERRORS_SECTION_ID).innerHTML = ""
+	
+	// Print each error to section
+	errors.forEach( function(err) {
+		document.getElementById(ERRORS_SECTION_ID).innerHTML += 
+			'<font color=\"red\">' + err + '</font><br/>'
+	});
 }
 
 function clearErrors() {
-	setErr('')
+	setErr([])
 	unmarkLabel(USERNAME_LABEL_ID)
 	unmarkLabel(PASSWORD_LABEL_ID)
 }
@@ -70,7 +77,7 @@ function login(){
 	var pass = document.getElementById(PASSWORD_INPUT_ID).value
 	
 	var err = verify(username, pass)
-	if(!err) {
+	if(!err.length) {
 		document.getElementById(LOGIN_FORM_ID).innerHTML='<h1>success</h1>'
 	} else {
 		setErr(err)
