@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Ex1</title>
-	<script src="./src/ex2.js"></script>
+	
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body dir="rtl">
@@ -24,7 +24,7 @@
 	</nav>
 	
 	<div id="login-form" class="main">
-		<button onclick="hideLoginForm()">&times;</button>
+		<button id="close-button">&times;</button>
         <h1>התחברות</h1>
 			<label id="username-label" class="login-field-label">
 				שם משתמש:
@@ -37,8 +37,9 @@
 			<p>
 				טקסט ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
 			</p>
-			<button onclick="login()" class="login-button">התחבר</button>
+			<button id="login-button" class="login-button">התחבר</button>
 			<div id="errors"></div>
     </div>
+	<script src="./src/ex2.js"></script>
 </body>
 </html>
