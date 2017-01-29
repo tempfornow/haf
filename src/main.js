@@ -82,7 +82,10 @@ function login(){
 	
 	var err = verify(username, pass)
 	if(!err.length) {
-		$('#' + LOGIN_FORM_ID).html('<h1>success</h1>')
+		$('#' + LOGIN_FORM_ID).fadeOut('slow', function() {
+			$(this).html('<h1>success</h1>')
+			$(this).fadeIn('slow')
+		});
 	} else {
 		setErr(err)
 	}	
