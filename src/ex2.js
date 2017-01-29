@@ -82,14 +82,14 @@ function login(){
 	
 	var err = verify(username, pass)
 	if(!err.length) {
-		document.getElementById(LOGIN_FORM_ID).innerHTML='<h1>success</h1>'
+		document.getElementById(LOGIN_FORM_ID).innerHTML = '<h1>success</h1>'
 	} else {
 		setErr(err)
 	}	
 }
 
 function hideLoginForm() {
-	document.getElementById(LOGIN_FORM_ID).style.visibility = 'hidden'
+	document.getElementById(LOGIN_FORM_ID).innerHTML = ''
 }
 
 // Register event listeners for close button and login button
