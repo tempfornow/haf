@@ -25,11 +25,11 @@ function isValidUsername(username) {
 }
 
 function markLabel(labelId) {
-	document.getElementById(labelId).style.color = ERR_COLOR
+	$('#'+labelId).css('color', ERR_COLOR)
 }
 
 function unmarkLabel(labelId) {
-	document.getElementById(labelId).style.color = VALID_COLOR
+	$('#'+labelId).css('color', VALID_COLOR)
 }
 
 // Checks validity of username an password and
@@ -56,12 +56,12 @@ function verify(username, pass) {
 
 function setErr(errors) {
 	// Clear errors section
-	document.getElementById(ERRORS_SECTION_ID).innerHTML = ""
+	$('#' + ERRORS_SECTION_ID).empty()
 	
 	// Print each error to section
 	errors.forEach( function(err) {
-		document.getElementById(ERRORS_SECTION_ID).innerHTML += 
-			'<font color=\"red\">' + err + '</font><br/>'
+		$('#' + ERRORS_SECTION_ID).append('<font color=\"red\">' + 
+			err + '</font><br/>')
 	});
 }
 
@@ -77,21 +77,21 @@ function clearErrors() {
 function login(){
 	clearErrors()
 	
-	var username = document.getElementById(USERNAME_INPUT_ID).value
-	var pass = document.getElementById(PASSWORD_INPUT_ID).value
+	var username = $('#' + USERNAME_INPUT_ID).val()
+	var pass = $('#' + PASSWORD_INPUT_ID).val()
 	
 	var err = verify(username, pass)
 	if(!err.length) {
-		document.getElementById(LOGIN_FORM_ID).innerHTML = '<h1>success</h1>'
+		$('#' + LOGIN_FORM_ID).html('<h1>success</h1>')
 	} else {
 		setErr(err)
 	}	
 }
 
 function hideLoginForm() {
-	document.getElementById(LOGIN_FORM_ID).innerHTML = ''
+	$('#' + LOGIN_FORM_ID).empty()
 }
 
 // Register event listeners for close button and login button
-document.getElementById(LOGIN_BUTTON_ID).addEventListener("click", login)
-document.getElementById(CLOSE_BUTTON_ID).addEventListener("click", hideLoginForm)
+$('#' + LOGIN_BUTTON_ID).click(login)
+$('#' + CLOSE_BUTTON_ID).click(hideLoginForm)
