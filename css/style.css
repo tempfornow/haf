@@ -15,35 +15,53 @@ body {
 	z-index: 1;
 	top:0;
 	width:100%;
-	background-color:#2B3840;
+	background-color:black;
+}
+
+.menu-button {
+	background-color: #404040;
+    border: none;
+    color: 	#cab287;
+    text-align: center;
+    font-size: 18px;
+	font-weight: bold;
+	border-radius: 0.3em;
+	cursor: pointer;
+	padding: 0.2em 0.4em;
+	margin-left: 0.4em;
+}
+
+.menu-button:hover {
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .right-buttons-group {
 	float:right;
 	position:relative;
 	right: 1em;
-	top:1em
+	top:1.5em
+}
+
+.left-buttons-group {
+	float: left;
+	position: relative;
+	left: 1em;
+	top: 1.5em;
 }
 
 .logo {
 	float:right;
 	position:relative;
-	right:0;
-	
-}
-.left-buttons-group {
-	float:left;
-	position:relative;
-	left: 1em;
-	top:1em;
+	right:0;	
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
+    -webkit-transition: -webkit-filter 2s;
 }
 
-.right-button {
-	
-}
-
-.left-button {
-	
+.logo:hover {
+	-webkit-filter: grayscale(0);
+	filter: grayscale(0);
 }
 
 .main {

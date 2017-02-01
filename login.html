@@ -2,40 +2,45 @@
 <html>
 <head>
     <title>Ex1</title>
+	
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body dir="rtl">
 	<nav class="navbar">
 		<img src="images/logo.jpg" class="logo">
 		<div class="button-group right-buttons-group">		
-			<button class="right-button">
+			<button class="menu-button right-button">
 				כפתור1
 			</button>
-			<button class="right-button">
+			<button class="menu-button">
 				כפתור2
 			</button>
 		</div>
 		<div class="button-group left-buttons-group">
-			<button class="left-button">
+			<button class="menu-button">
 				?
 			</button>
 		</div>
 	</nav>
 	
-	<div class="main">
+	<div id="login-form" class="main">
+		<button id="close-button">&times;</button>
         <h1>התחברות</h1>
-			<label class="login-field-label">
+			<label id="username-label" class="login-field-label">
 				שם משתמש:
-				<input type="text">
+				<input id="username" type="text">
 			</label>
-			<label  class="login-field-label">
+			<label  id="password-label" class="login-field-label">
 				סיסמא:
-				<input type="password">
+				<input id="password" type="password">
 			</label>
 			<p>
 				טקסט ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
 			</p>
-			<button class="login-button">התחבר</button>
+			<button id="login-button" class="login-button">התחבר</button>
+			<div id="errors"></div>
     </div>
+	<script src="./src/lib/jquery.min.js"></script>
+	<script src="./src/main.js"></script>
 </body>
 </html>
