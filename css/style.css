@@ -33,6 +33,7 @@ body {
 
 .menu-button:hover {
 	-webkit-transform: scale(1.1);
+	-webkit-transition: -webkit-transform 0.1s;
 	transform: scale(1.1);
 }
 
@@ -64,17 +65,68 @@ body {
 	filter: grayscale(0);
 }
 
-.main {
+.login-form {
 	position: relative;
-	width: 33%;
-	margin: 0 auto;
+	background-color: #FAFAFA;
+	text-align: center;
+	width: 40em;
+	margin: auto;
 	top: 7em;
+	border-radius: 0.5em;
+	border: 0.1em solid #BBB;
+    padding: 0.1em 1em 2.3em;
+	overflow: hidden;
 }
 
 .login-field-label {
-	
+	right: 0;
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0.5em auto;
+}
+
+.form-fields {
+	display: table;
+	margin: 0 auto;
+}
+
+.form-fields label{
+	display: table-row;
+	text-align: right;
+	margin: auto;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.login-input, .form-fields label span {
+	display: table-cell;
+	margin: 0.3em 1em auto;
+}
+
+.login-input {
+	border: 1px solid #ccc;
+    border-radius: 0.5em;
+    box-sizing: border-box;
 }
 
 .login-button {
+	position: absolute;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 0.3em;
+	left: 0;
+	right: 0;
+	bottom:0;
 	
+}
+
+.close-button {
+	position: absolute;
+	float: left;
+	top:0.1em;
+	left: 0.2em;
 }
