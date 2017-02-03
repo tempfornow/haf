@@ -89,7 +89,7 @@ function login(){
 }
 
 function hideLoginForm() {
-	document.getElementById(LOGIN_FORM_ID).innerHTML = ''
+	document.getElementById(LOGIN_FORM_ID).remove()
 }
 
 // Register event listeners for close button and login button

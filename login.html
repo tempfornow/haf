@@ -9,33 +9,37 @@
 	<nav class="navbar">
 		<img src="images/logo.jpg" class="logo">
 		<div class="button-group right-buttons-group">		
-			<button class="right-button">
+			<button class="menu-button right-button">
 				כפתור1
 			</button>
-			<button class="right-button">
+			<button class="menu-button">
 				כפתור2
 			</button>
 		</div>
 		<div class="button-group left-buttons-group">
-			<button class="left-button">
+			<button class="menu-button">
 				?
 			</button>
 		</div>
 	</nav>
 	
-	<div id="login-form" class="main">
-		<button id="close-button">&times;</button>
-        <h1>התחברות</h1>
-			<label id="username-label" class="login-field-label">
-				שם משתמש:
-				<input id="username" type="text">
-			</label>
-			<label  id="password-label" class="login-field-label">
-				סיסמא:
-				<input id="password" type="password">
-			</label>
-			<p>
-				טקסט ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
+	<div id="login-form" class="login-form">
+		<button class="close-button" id="close-button">&times;</button>
+        <h1 class="form-header">התחברות</h1>
+			<div class="form-fields">
+				<label id="username-label" class="login-field-label">
+					<span>שם משתמש:</span>
+					<input id="username" type="text" class="login-input">
+				</label>
+				<label  id="password-label" class="login-field-label">
+					<span>סיסמא:</span>
+					<input id="password" type="password" class="login-input">
+				</label>
+			</div>
+			<p class="info">
+				טקסט ארוך ארוך ארוך ארוך ארוךארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
+				טקסט ארוך ארוך ארוך ארוך ארוךארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
+				טקסט ארוך ארוך ארוך ארוך ארוךארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
 			</p>
 			<button id="login-button" class="login-button">התחבר</button>
 			<div id="errors"></div>
