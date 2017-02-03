@@ -92,7 +92,7 @@ function login(){
 }
 
 function hideLoginForm() {
-	$('#' + LOGIN_FORM_ID).empty()
+	$('#' + LOGIN_FORM_ID).remove()
 }
 
 // Register event listeners for close button and login button
