@@ -210,8 +210,20 @@ body {
 .info {
 	position: relative;
 	text-align: right;
+	margin: 0 auto;
 	background-color: lightblue;
 	top: 0.5em;
 	padding: 0.2em 0.6em;
 	border-radius: 0.5em;
+	font-size: 12px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.info:hover{
+	overflow: visible; 
+	white-space: normal; 
+	width: auto;
 }
