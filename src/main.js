@@ -39,16 +39,12 @@ function verify(username, pass) {
 	
 	if(!isValidUsername(username)) {
 		markLabel(USERNAME_LABEL_ID);
-		errors.push('*Invalid username format: \
-			username should should contain only\
-			small latters,digits,dash and lodash')
+		errors.push('על שם המשתמש להכיל אותיות קטנות, קו תחתון, מקף ומספרים בלבד!')
 	}
 	
 	if(!isValidPassword(pass)) {
 		markLabel(PASSWORD_LABEL_ID);
-		errors.push('*Invalid password format - password \
-			should contain at least 8 characters \
-			and no backspace characters')
+		errors.push('על הסיסמא להכיל לפחות 8 תווים ולא להכיל רווחים!')			
 	}
 	
 	return errors;
