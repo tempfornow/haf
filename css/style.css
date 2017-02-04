@@ -228,3 +228,9 @@ body {
 	white-space: normal; 
 	width: auto;
 }
+
+.errors-section {
+	text-align: right;
+	font-family: Arial;
+	color: red;
+}
