@@ -1,44 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <title>Ex1</title>
-	<link rel="stylesheet" href="css/style.css">
-</head>
-<body dir="rtl">
-	<nav>
-		<img src="images/logo.jpg">
-		<div>		
-			<button>
-				כפתור1
-			</button>
-			<button>
-				כפתור2
-			</button>
-		</div>
-		<div>
-			<button>
-				?
-			</button>
-		</div>
-	</nav>
-	
-	<div>
-        <button>&times;</button>
-        <h1>התחברות</h1>
-		<form>
-			<label>
-				שם משתמש:
-				<input type="text">
-			</label>
-			<label>
-				סיסמא:
-				<input type="password">
-			</label>
-			<p>
-				טקסט ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
-			</p>
-			<button>התחבר</button>
-		</form>
-    </div>
-</body>
+   
+   <head>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+   </head>
+   
+   <body ng-app = "myapp">
+      
+	  <input type="text" ng-model="name">
+	  <br/>
+	  Hello {{name}}!
+	  
+      <div ng-controller = "HelloController" >
+         <h2>Welcome {{helloTo.title}} to the world of Tutorialspoint!</h2>
+      </div>
+      
+      <script>
+         angular.module("myapp", [])
+         
+         .controller("HelloController", function($scope) {
+            $scope.helloTo = {};
+            $scope.helloTo.title = "AngularJS";
+         });
+      </script>
+      
+   </body>
 </html>
