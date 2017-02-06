@@ -2,39 +2,68 @@
 <html>
    
    <head>
-      <script src = "./src/lib/angular.min.js"></script>
-      <script src = "./src/lib/lodash.min.js"></script>
+		<script src = "./src/lib/angular.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-rtl.min.css">
    </head>
    
-   <body ng-app = "myapp" dir = "rtl">
+   <body ng-app = "myapp">
       
-        <div ng-controller = "SoldiersController" >
-	  
-			שם: <input type = "text" ng-model = "name">
-			<br/>
-			גיל :<select ng-options="age for age in validAges" ng-model="age"></select>
-			<br/>
-			דרגה: <select ng-options="rank for rank in validRanks" ng-model="rank"></select>
-			<br/>
+        <div ng-controller = "SoldiersController" class="container">
 			
-			תאריך שחרור: <input type="text" ng-model = "discharge">
-			<br/>
-			<button ng-click = "addSoldier(name,age,rank,discharge)">Add</button>
-			<table border = "0">
-				<tr>
-					<th>שם</th>
-					<th>גיל</th>
-					<th>דרגה</th>
-					<th>תאריך שחרור</th>
-				</tr>
-				<tr ng-repeat = "soldier in soldiersList">
-					
-					<td>{{soldier.name}}</td>
-					<td>{{soldier.age}}</td>
-					<td>{{soldier.rank}}</td>
-					<td>{{soldier.discharge}}</td>
-				</tr>
-			</table>
+			
+			<!-- Add soldiers section -->
+			<div class="row">
+				<div class = "panel panel-primary col-lg-9 col-lg-offset-1">
+					<div class = "panel-body">
+						<form class = "form-inline">
+							<div class = "form-group">
+								<label for = "name">שם:</label>
+								<input id="name" type = "text" class="form-control" ng-model = "name">
+							</div>
+							<div class = "form-group">
+								<label for = "age">גיל:</label>
+								<select id="age" class = "form-control input-sm" 
+									ng-options="age for age in validAges" ng-model="age"></select>
+							</div>
+							<div class = "form-group">
+								<label for = "rank">דרגה:</label>
+								<select class="form-control" 
+									ng-options="rank for rank in validRanks" ng-model="rank"></select>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "discharge">תת"ש</label>
+								<input class="form-control" type="text" ng-model = "discharge">
+							</div>
+							
+							<button class="btn btn-default" 
+								ng-click = "addSoldier(name,age,rank,discharge)">הוספה</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Soldiers table-->
+			<div class="row">
+				<table class="table table-striped col-lg-6 col-lg-offset-3">
+					<thead>
+						<tr>
+							<th>שם</th>
+							<th>גיל</th>
+							<th>דרגה</th>
+							<th>תאריך שחרור</th>
+						</tr>
+					</thead>
+					<tr ng-repeat = "soldier in soldiersList">
+						
+						<td>{{soldier.name}}</td>
+						<td>{{soldier.age}}</td>
+						<td>{{soldier.rank}}</td>
+						<td>{{soldier.discharge}}</td>
+					</tr>
+				</table>
+			</div>
 		</div>
       
       <script>
@@ -57,5 +86,9 @@
          });
       </script>
       
+	  
+      <script src = "./src/lib/lodash.min.js"></script>
+	  <script src = "./src/lib/jquery.min.js"></script>
+	  <script src = "./src/lib/bootstrap.min.js"></script>
    </body>
 </html>
