@@ -6,26 +6,26 @@
       <script src = "./src/lib/lodash.min.js"></script>
    </head>
    
-   <body ng-app = "myapp">
+   <body ng-app = "myapp" dir = "rtl">
       
         <div ng-controller = "SoldiersController" >
 	  
-			Name: <input type = "text" ng-model = "name">
+			שם: <input type = "text" ng-model = "name">
 			<br/>
-			Age: <select ng-options="age for age in validAges" ng-model="age"></select>
+			גיל :<select ng-options="age for age in validAges" ng-model="age"></select>
 			<br/>
-			Rank: <select ng-options="rank for rank in validRanks" ng-model="rank"></select>
+			דרגה: <select ng-options="rank for rank in validRanks" ng-model="rank"></select>
 			<br/>
 			
-			Discharge date: <input type="text" ng-model = "discharge">
+			תאריך שחרור: <input type="text" ng-model = "discharge">
 			<br/>
 			<button ng-click = "addSoldier(name,age,rank,discharge)">Add</button>
 			<table border = "0">
 				<tr>
-					<th>Name</th>
-					<th>Age</th>
-					<th>Rank</th>
-					<th>Discharge date</th>
+					<th>שם</th>
+					<th>גיל</th>
+					<th>דרגה</th>
+					<th>תאריך שחרור</th>
 				</tr>
 				<tr ng-repeat = "soldier in soldiersList">
 					
@@ -42,7 +42,7 @@
          
          .controller("SoldiersController", function($scope) {
 			<!-- Initial soldiers list -->
-            $scope.soldiersList = [{name:"Avi", age:18, rank:"Sergeant", discharge: "14/05/21"}]
+            $scope.soldiersList = []
 			<!-- List of valid ages(valid age of a soldier) -->
 			$scope.validAges = _.range(18,121)
 			$scope.validRanks = ['קמ"א','קא"ב',
