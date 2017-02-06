@@ -3,16 +3,22 @@
    
    <head>
       <script src = "./src/lib/angular.min.js"></script>
+      <script src = "./src/lib/lodash.min.js"></script>
    </head>
    
-   <body ng-app = "myapp" ng-init="[]">
+   <body ng-app = "myapp">
       
         <div ng-controller = "SoldiersController" >
 	  
-			Name: <input type = "text" ng-model = "name"><br/>
-			Age: <input type = "text" ng-model = "age"><br/>
-			Rank: <input type = "text" ng-model = "rank"><br/>
-			Discharge date: <input type="text" ng-model = "discharge"><br/>
+			Name: <input type = "text" ng-model = "name">
+			<br/>
+			Age: <select ng-options="age for age in validAges" ng-model="age"></select>
+			<br/>
+			Rank: <select ng-options="rank for rank in validRanks" ng-model="rank"></select>
+			<br/>
+			
+			Discharge date: <input type="text" ng-model = "discharge">
+			<br/>
 			<button ng-click = "addSoldier(name,age,rank,discharge)">Add</button>
 			<table border = "0">
 				<tr>
@@ -35,11 +41,17 @@
          angular.module("myapp", [])
          
          .controller("SoldiersController", function($scope) {
-            $scope.soldiersList = [{name:"Avi", age:18, rank:"Sergeant", discharge: "14/05/21"}];
+			<!-- Initial soldiers list -->
+            $scope.soldiersList = [{name:"Avi", age:18, rank:"Sergeant", discharge: "14/05/21"}]
+			<!-- List of valid ages(valid age of a soldier) -->
+			$scope.validAges = _.range(18,121)
+			$scope.validRanks = ['קמ"א','קא"ב',
+				'טוראי','רב"ט','סמל','סמ"ר','רס"ל','רס"ר','רס"ם','רס"ב','רנ"ם','רנ"ג',
+				'סג"ם','סגן','סרן','רס"ן','סא"ל','אל"מ','תא"ל','אלוף','רא"ל']
+			<!-- list of ranks -->
 			<!-- Adds soldier according to given data about him -->
-			
 			$scope.addSoldier = function(name,age,rank,discharge) {
-				$scope.soldiersList.push({name,age,rank,discharge});
+				$scope.soldiersList.push({name,age,rank,discharge})
 			}
 
          });
