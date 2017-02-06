@@ -2,25 +2,46 @@
 <html>
    
    <head>
-      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+      <script src = "./src/lib/angular.min.js"></script>
    </head>
    
-   <body ng-app = "myapp">
+   <body ng-app = "myapp" ng-init="[]">
       
-	  <input type="text" ng-model="name">
-	  <br/>
-	  Hello {{name}}!
+        <div ng-controller = "SoldiersController" >
 	  
-      <div ng-controller = "HelloController" >
-         <h2>Welcome {{helloTo.title}} to the world of Tutorialspoint!</h2>
-      </div>
+			Name: <input type = "text" ng-model = "name"><br/>
+			Age: <input type = "text" ng-model = "age"><br/>
+			Rank: <input type = "text" ng-model = "rank"><br/>
+			Discharge date: <input type="text" ng-model = "discharge"><br/>
+			<button ng-click = "addSoldier(name,age,rank,discharge)">Add</button>
+			<table border = "0">
+				<tr>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Rank</th>
+					<th>Discharge date</th>
+				</tr>
+				<tr ng-repeat = "soldier in soldiersList">
+					
+					<td>{{soldier.name}}</td>
+					<td>{{soldier.age}}</td>
+					<td>{{soldier.rank}}</td>
+					<td>{{soldier.discharge}}</td>
+				</tr>
+			</table>
+		</div>
       
       <script>
          angular.module("myapp", [])
          
-         .controller("HelloController", function($scope) {
-            $scope.helloTo = {};
-            $scope.helloTo.title = "AngularJS";
+         .controller("SoldiersController", function($scope) {
+            $scope.soldiersList = [{name:"Avi", age:18, rank:"Sergeant", discharge: "14/05/21"}];
+			<!-- Adds soldier according to given data about him -->
+			
+			$scope.addSoldier = function(name,age,rank,discharge) {
+				$scope.soldiersList.push({name,age,rank,discharge});
+			}
+
          });
       </script>
       
