@@ -21,13 +21,12 @@
 						<form name = "soldierForm">
 						
 							<!-- Name -->
-							<div class = "form-group" ng-class = "{ 'has-error' : soldierForm.name.$dirty && 
-									soldierForm.name.$invalid && 
+							<div class = "form-group" ng-class = "{ 'has-error' : soldierForm.name.$invalid && 
 									soldierForm.name.$error.required }">
 								<label>שם:</label>
 								<input name = "name" type = "text" class="form-control" ng-model = "name" required>
 								<p 	class = "help-block"
-									ng-show = "soldierForm.name.$dirty && 
+									ng-show = "	 
 									soldierForm.name.$invalid && 
 									soldierForm.name.$error.required">יש להזין שם</p>
 							</div>
@@ -50,14 +49,12 @@
 							</div>
 							
 							<!-- Discharge date -->
-							<div class = "form-group"  ng-class = "{ 'has-error' : soldierForm.discharge.$dirty && 
-									soldierForm.discharge.$invalid && 
+							<div class = "form-group"  ng-class = "{ 'has-error' : soldierForm.discharge.$invalid && 
 									soldierForm.discharge.$error.required }">
 								<label for = "discharge">תת"ש</label>
 								<input name = "discharge" type="text" class = "form-control" ng-model = "discharge" required>
 								<p 	class = "help-block"
-									ng-show = "soldierForm.discharge.$dirty && 
-									soldierForm.discharge.$invalid && 
+									ng-show = "soldierForm.discharge.$invalid && 
 									soldierForm.discharge.$error.required">יש להזין תת"ש</p>
 							</div>
 							
@@ -65,7 +62,8 @@
 								ng-click = "addSoldier(name,age,rank,discharge)"
 								ng-disabled = "!soldierForm.rank.$dirty || 
 									!soldierForm.age.$dirty ||
-									soldierForm.discharge.$error">הוספה</button>
+									soldierForm.discharge.$invalid ||
+									soldierForm.name.$invalid">הוספה</button>
 						</form>
 					</div>
 				</div>
