@@ -14,31 +14,58 @@
 			
 			<!-- Add soldiers section -->
 			<div class="row">
+				<div class = "page-header"><h2>מערכת לניהול חיילים</h2></div>
 				<div class = "panel panel-primary col-lg-9 col-lg-offset-1">
+				
 					<div class = "panel-body">
-						<form class = "form-inline">
-							<div class = "form-group">
-								<label for = "name">שם:</label>
-								<input id="name" type = "text" class="form-control" ng-model = "name">
-							</div>
-							<div class = "form-group">
-								<label for = "age">גיל:</label>
-								<select id="age" class = "form-control input-sm" 
-									ng-options="age for age in validAges" ng-model="age"></select>
-							</div>
-							<div class = "form-group">
-								<label for = "rank">דרגה:</label>
-								<select class="form-control" 
-									ng-options="rank for rank in validRanks" ng-model="rank"></select>
+						<form name = "soldierForm">
+						
+							<!-- Name -->
+							<div class = "form-group" ng-class = "{ 'has-error' : soldierForm.name.$dirty && 
+									soldierForm.name.$invalid && 
+									soldierForm.name.$error.required }">
+								<label>שם:</label>
+								<input name = "name" type = "text" class="form-control" ng-model = "name" required>
+								<p 	class = "help-block"
+									ng-show = "soldierForm.name.$dirty && 
+									soldierForm.name.$invalid && 
+									soldierForm.name.$error.required">יש להזין שם</p>
 							</div>
 							
-							<div class = "form-group">
+							<!-- Age -->
+							<div class = "form-group" ng-class = "{ 'has-error' : !soldierForm.age.$dirty }">
+								<label>גיל:</label>
+								<select name = "age" class = "form-control input-sm" 
+									ng-options="age for age in validAges" ng-model="age"></select>
+								<p ng-show = "!soldierForm.age.$dirty" class = "help-block">יש להזין גיל</p>	
+								
+							</div>
+							
+							<!-- Rank -->
+							<div class = "form-group" ng-class = "{ 'has-error' : !soldierForm.rank.$dirty }">
+								<label>דרגה:</label>
+								<select name = "rank" class="form-control" 
+									ng-options="rank for rank in validRanks" ng-model="rank"></select>
+								<p ng-show = "!soldierForm.rank.$dirty" class = "help-block">יש להזין דרגה</p>
+							</div>
+							
+							<!-- Discharge date -->
+							<div class = "form-group"  ng-class = "{ 'has-error' : soldierForm.discharge.$dirty && 
+									soldierForm.discharge.$invalid && 
+									soldierForm.discharge.$error.required }">
 								<label for = "discharge">תת"ש</label>
-								<input class="form-control" type="text" ng-model = "discharge">
+								<input name = "discharge" type="text" class = "form-control" ng-model = "discharge" required>
+								<p 	class = "help-block"
+									ng-show = "soldierForm.discharge.$dirty && 
+									soldierForm.discharge.$invalid && 
+									soldierForm.discharge.$error.required">יש להזין תת"ש</p>
 							</div>
 							
 							<button class="btn btn-default" 
-								ng-click = "addSoldier(name,age,rank,discharge)">הוספה</button>
+								ng-click = "addSoldier(name,age,rank,discharge)"
+								ng-disabled = "!soldierForm.rank.$dirty || 
+									!soldierForm.age.$dirty ||
+									soldierForm.discharge.$error">הוספה</button>
 						</form>
 					</div>
 				</div>
