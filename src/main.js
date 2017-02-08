@@ -3,14 +3,10 @@ const ERR_COLOR = 'red'
 const VALID_COLOR = 'black'
 
 const MIN_PASSWORD_LEN = 8
-const USERNAME_LABEL_ID = 'username-label'
 const LOGIN_FORM_ID = 'login-form'
-const PASSWORD_LABEL_ID = 'password-label'
 const USERNAME_INPUT_ID = 'username'
 const PASSWORD_INPUT_ID = 'password'
-const ERRORS_SECTION_ID = 'errors'
 const LOGIN_BUTTON_ID = 'login-button'
-const CLOSE_BUTTON_ID = 'close-button'
 
 
 
@@ -24,47 +20,43 @@ function isValidUsername(username) {
 	});
 }
 
-function markLabel(labelId) {
-	$('#'+labelId).css('color', ERR_COLOR)
-}
-
-function unmarkLabel(labelId) {
-	$('#'+labelId).css('color', VALID_COLOR)
-}
 
 // Checks validity of username an password and
-// returns errors list(empty if everything is valid)
-function verify(username, pass) {
-	var errors = []
+// returns errors dictionary(empty if everything is valid)
+function getErrors(username, pass) {
+	var errors = {}
 	
 	if(!isValidUsername(username)) {
-		markLabel(USERNAME_LABEL_ID);
-		errors.push('על שם המשתמש להכיל אותיות קטנות, קו תחתון, מקף ומספרים בלבד!')
+		errors[USERNAME_INPUT_ID] = 'על שם המשתמש להכיל אותיות קטנות, קו תחתון, מקף ומספרים בלבד!'
 	}
 	
 	if(!isValidPassword(pass)) {
-		markLabel(PASSWORD_LABEL_ID);
-		errors.push('על הסיסמא להכיל לפחות 8 תווים ולא להכיל רווחים!')			
+		errors[PASSWORD_INPUT_ID] = 'על הסיסמא להכיל לפחות 8 תווים ולא להכיל רווחים!'			
 	}
 	
 	return errors;
 }
 
-function setErr(errors) {
-	// Clear errors section
-	$('#' + ERRORS_SECTION_ID).empty()
+// Mark errors in the corresponding inputs
+// According to errors dictionary
+function markErrors(errorsDic) {
 	
-	// Print each error to section
-	errors.forEach( function(err) {
-		$('#' + ERRORS_SECTION_ID).append('<font color=\"red\">' + 
-			err + '</font><br/>')
-	});
+	// Iterate over input IDs and mark errors
+	_.forOwn(errorsDic, function(error, inputId) { 
+		$('#' + inputId).closest('.form-group').addClass('has-error')
+		$('#' + inputId).siblings('.help-block').html(error)
+	} );
 }
 
 function clearErrors() {
-	setErr([])
-	unmarkLabel(USERNAME_LABEL_ID)
-	unmarkLabel(PASSWORD_LABEL_ID)
+	
+	// Clear errors
+	$(".help-block").html("");
+	
+	// Clear warning css
+	$("#username").closest('.form-group').removeClass('has-error')
+	$("#password").closest('.form-group').removeClass('has-error')
+	
 }
 
 // Activated when login button is pressed
@@ -76,24 +68,25 @@ function login(){
 	var username = $('#' + USERNAME_INPUT_ID).val()
 	var pass = $('#' + PASSWORD_INPUT_ID).val()
 	
-	var err = verify(username, pass)
-	if(!err.length) {
+	// Get errors dictionary.Dictionary keys 
+	// are invalid input ids and values 
+	// are corresponding errors
+	errorsDic = getErrors(username, pass)
+	markErrors(getErrors(username, pass))
+	
+	if(_.isEmpty(errorsDic)) {
+		$('#' + LOGIN_BUTTON_ID).remove()
 		$('#' + LOGIN_FORM_ID).fadeOut('slow', function() {
-			$(this).html('<h1>success</h1>')
+			$(this).html('<div class = "text-center">ההתחברות עברה בהצלחה!</div>')
 			$(this).fadeIn('slow')
 		});
 	} else {
-		setErr(err)
-	}	
-}
-
-function hideLoginForm() {
-	$('#' + LOGIN_FORM_ID).remove()
+		markErrors(errorsDic)
+	}
 }
 
 // Register event listeners for close button and login button
 $('#' + LOGIN_BUTTON_ID).click(login)
-$('#' + CLOSE_BUTTON_ID).click(hideLoginForm)
 
 // Change sort glyphicons onclick 
 $(".glyphicon-arrow-down").click(function() { 
