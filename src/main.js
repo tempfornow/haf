@@ -94,3 +94,7 @@ function hideLoginForm() {
 // Register event listeners for close button and login button
 $('#' + LOGIN_BUTTON_ID).click(login)
 $('#' + CLOSE_BUTTON_ID).click(hideLoginForm)
+
+// Change sort glyphicons onclick 
+$(".glyphicon-arrow-down").click(function() { 
+	$(this).toggleClass("glyphicon-arrow-down").toggleClass("glyphicon-arrow-up")});
