@@ -59,10 +59,13 @@ function clearErrors() {
 	
 }
 
-// Activated when login button is pressed
-// checks the validity of username and password fields
+// Activated when login button is pressed.
+// Checks the validity of username and password fields
 // and altering the ui respectively
 function login(){
+	
+	// Clear error messages and css marks of
+	// invalid fields
 	clearErrors()
 	
 	var username = $('#' + USERNAME_INPUT_ID).val()

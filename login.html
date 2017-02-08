@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ex1</title>
+    <title>Ex4</title>
 	
 	<link rel = "stylesheet" href="css/bootstrap.min.css">
 	<link rel = "stylesheet" href="css/bootstrap-rtl.min.css">
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
-	<!-- <nav class="navbar">
-		<img src="images/logo.jpg" class="logo">
-		<div class="button-group right-buttons-group">		
-			<button class="menu-button right-button">
-				כפתור1
-			</button>
-			<button class="menu-button">
-				כפתור2
-			</button>
-		</div>
-		<div class="button-group left-buttons-group">
-			<button class="menu-button">
-				?
-			</button>
-		</div>
-	</nav> -->
 	
+	<!-- Navigation bar -->
 	<nav class = "navbar navbar-inverse ">
-	  <div class = "container-fluid">
-		<div class = "navbar-header">
-			<!-- <img class = "navbar-brand" src = "./images/logo.jpg"> -->
-			<a class = "navbar-brand" href = "#">Mamram</a>
+		<div class = "container-fluid">
+			<div class = "navbar-header">
+			
+				<!-- Toggle button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+				<!-- <img class = "navbar-brand" src = "./images/logo.jpg"> -->
+				<a class = "navbar-brand" href = "#">Mamram</a>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class = "nav navbar-nav">
+					<button type = "button" class = "btn btn-primary navbar-btn" 
+					data-toggle = "modal" data-target = "#login-modal">התחבר</button>
+					<button type = "button" class = "btn btn-primary navbar-btn">כפתור2</button>
+				</ul>
+				<ul class = "nav navbar-nav navbar-left">
+					<button type = "button" class = "btn btn-info navbar-btn">?</button>
+				</ul>
+			</div>
 		</div>
-		
-		<ul class = "nav navbar-nav">
-			<button type = "button" class = "btn btn-primary navbar-btn" 
-			data-toggle = "modal" data-target = "#login-modal">התחבר</button>
-			<button type = "button" class = "btn btn-primary navbar-btn">כפתור2</button>
-		</ul>
-		<ul class = "nav navbar-nav navbar-left">
-			<button type = "button" class = "btn btn-info navbar-btn">?</button>
-		</ul>
-	  </div>
 	</nav>
 	
 	<!-- Login modal -->
@@ -77,27 +72,6 @@
 			
 		</div>
 	</div>
-	<!-- <div id="login-form" class="login-form">
-		<button class="close-button" id="close-button">&times;</button>
-        <h1 class="form-header">התחברות</h1>
-			<div class="form-fields">
-				<label id="username-label" class="login-field-label">
-					<span>שם משתמש:</span>
-					<input id="username" type="text" class="login-input">
-				</label>
-				<label  id="password-label" class="login-field-label">
-					<span>סיסמא:</span>
-					<input id="password" type="password" class="login-input">
-				</label>
-			</div>
-			<p class="info">
-				טקסט ארוך ארוך ארוך ארוך ארוךארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
-				טקסט ארוך ארוך ארוך ארוך ארוךארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
-				טקסט ארוך ארוך ארוך ארוך ארוךארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך ארוך   
-			</p>
-			<button id="login-button" class="login-button">התחבר</button>
-			<div id="errors" class="errors-section"></div>
-    </div> -->
 	
 	<!-- Centered table -->
 	<div class = "container">
@@ -164,20 +138,6 @@
 		</div>
 	</div>
 	
-	<!-- <form class = "form-horizontal">
-	  <div class = "form-group">
-		<div class = "col-lg-3 col-lg-offset-3">
-		  <input type = "email" class = "form-control" id = "email" placeholder = "שם משתמש">
-		</div>
-	  </div>
-	  
-	  <div class = "form-group">
-		<div class = "col-lg-3 col-lg-offset-3">
-		  <input type = "email" class = "form-control" id = "email" placeholder = "שם משתמש">
-		</div>
-	  </div>
-	  
-	</form> -->
 
 	<script src = "./src/lib/jquery.min.js"></script>
 	<script src = "./src/lib/bootstrap.min.js"></script>
