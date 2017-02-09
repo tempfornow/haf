@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
    
    <head>
@@ -8,91 +8,233 @@
    </head>
    
    <body ng-app = "myapp">
-        <div ng-controller = "SoldiersController" class="container">
+   
+		<!-- Navigation bar -->
+		<nav class = "navbar navbar-inverse ">
+			<div class = "container-fluid">
+				<div class = "navbar-header">
 				
-			<!-- Add soldiers section -->
-			<div class="row">
-				<div class = "page-header"><h2>מערכת לניהול חיילים</h2></div>
-				<div class = "panel panel-primary col-lg-9 col-lg-offset-1">
+					<!-- Toggle button -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					
+					<!-- <img class = "navbar-brand" src = "./images/logo.jpg"> -->
+					<a class = "navbar-brand" href = "#">Mamram</a>
+				</div>
 				
-					<div class = "panel-body">
-						<form name = "soldierForm">
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class = "nav navbar-nav">
+						<button type = "button" class = "btn btn-primary navbar-btn" 
+							data-toggle = "modal" data-target = "#login-modal">התחבר</button>
+						<button type = "button" class = "btn btn-primary navbar-btn"
+							data-toggle = "modal" 	data-target = "#register-modal">הרשמה</button>
+					</ul>
+					<ul class = "nav navbar-nav navbar-left">
+						<button type = "button" class = "btn btn-info navbar-btn">?</button>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+        <!-- Login modal -->
+		<div id  =  "login-modal" class = "modal fade" role = "dialog">
+			<div class = "modal-dialog modal-sm">
+				<div class = "modal-content">
+					<div class = "modal-header">
 						
-							<!-- Name -->
-							<div class = "form-group" ng-class = "{ 'has-error' : soldierForm.name.$invalid && 
-									soldierForm.name.$error.required }">
-								<label>שם:</label>
-								<input name = "name" type = "text" class="form-control" ng-model = "name" required>
+						<button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+						<h4 class = "modal-title text-center">התחברות</h4>
+					</div>
+					<div class = "modal-body">
+						<form name = "loginForm">
+							
+							
+							<!-- Username -->
+							<div class = "form-group" ng-class = "{ 'has-error' : loginForm.username.$invalid && 
+									loginForm.username.$error.required }">
+								<label>שם משתמש:</label>
+								<input name = "username" type = "text" class="form-control" ng-model = "username" 
+									placeholder = "שם משתמש" required>
 								<p 	class = "help-block"
 									ng-show = "	 
-									soldierForm.name.$invalid && 
-									soldierForm.name.$error.required">יש להזין שם</p>
+									loginForm.username.$invalid && 
+									loginForm.username.$error.required">יש להזין שם משתמש</p>
+							</div>
+							
+							<!-- Password -->
+							<div class = "form-group" ng-class = "{ 'has-error' : loginForm.password.$invalid && 
+									loginForm.password.$error.required }">
+								<label>סיסמה:</label>
+								<input name = "password" type = "password" class="form-control" ng-model = "password" 
+									placeholder = "סיסמה" required>
+								<p 	class = "help-block"
+									ng-show = "	 
+									loginForm.password.$invalid && 
+									loginForm.password.$error.required">יש להזין סיסמה</p>
+							</div>
+						  
+						</form>
+					</div>
+					
+					<div class = "modal-footer">
+						<button id = "login-button" type = "button" class = "btn btn-success btn-block">התחבר</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		<!-- Registration modal -->
+		<div id  =  "register-modal" class = "modal fade" role = "dialog">
+			<div class = "modal-dialog modal-sm">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						
+						<button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+						<h4 class = "modal-title text-center">הרשמה</h4>
+					</div>
+					<div class = "modal-body">
+						<form name = "registerForm">
+							
+							
+							<!-- Username -->
+							<div class = "form-group" ng-class = "{ 'has-error' : registerForm.username.$invalid && 
+									registerForm.username.$error.required }">
+								<label>שם משתמש:</label>
+								<input name = "username" type = "text" class="form-control" ng-model = "username" 
+									placeholder = "שם משתמש" required>
+								<p 	class = "help-block"
+									ng-show = "	 
+									registerForm.username.$invalid && 
+									registerForm.username.$error.required">יש להזין שם משתמש</p>
+							</div>
+							
+							<!-- Password -->
+							<div class = "form-group" ng-class = "{ 'has-error' : registerForm.password.$invalid && 
+									registerForm.password.$error.required }">
+								<label>סיסמה:</label>
+								<input name = "password" type = "password" class="form-control" ng-model = "password" 
+									placeholder = "סיסמה" required>
+								<p 	class = "help-block"
+									ng-show = "	 
+									registerForm.password.$invalid && 
+									registerForm.password.$error.required">יש להזין סיסמה</p>
+							</div>
+							
+							<!-- Name -->
+							<div class = "form-group" ng-class = "{ 'has-error' : registerForm.name.$invalid && 
+									registerForm.name.$error.required }">
+								<label>שם פרטי:</label>
+								<input name = "name" type = "text" class="form-control" ng-model = "name" 
+									placeholder = "שם פרטי" required>
+								<p 	class = "help-block"
+									ng-show = "	 
+									registerForm.name.$invalid && 
+									registerForm.name.$error.required">יש להזין שם פרטי</p>
+							</div>
+							
+							<!-- Surname -->
+							<div class = "form-group" ng-class = "{ 'has-error' : registerForm.surname.$invalid && 
+									registerForm.surname.$error.required }">
+								<label>שם משפחה:</label>
+								<input name = "surname" type = "text" class="form-control" ng-model = "surname" 
+									placeholder = "שם משפחה" required>
+								<p 	class = "help-block"
+									ng-show = "	 
+									registerForm.surname.$invalid && 
+									registerForm.surname.$error.required">יש להזין שם משפחה:</p>
 							</div>
 							
 							<!-- Age -->
-							<div class = "form-group" ng-class = "{ 'has-error' : !soldierForm.age.$dirty }">
+							<div class = "form-group" ng-class = "{ 'has-error' : !registerForm.age.$dirty }">
 								<label>גיל:</label>
 								<select name = "age" class = "form-control input-sm" 
 									ng-options="age for age in validAges" ng-model="age"></select>
-								<p ng-show = "!soldierForm.age.$dirty" class = "help-block">יש להזין גיל</p>	
+								<p ng-show = "!registerForm.age.$dirty" class = "help-block">יש להזין גיל</p>	
 								
 							</div>
 							
-							<!-- Rank -->
-							<div class = "form-group" ng-class = "{ 'has-error' : !soldierForm.rank.$dirty }">
-								<label>דרגה:</label>
-								<select name = "rank" class="form-control" 
-									ng-options="rank for rank in validRanks" ng-model="rank"></select>
-								<p ng-show = "!soldierForm.rank.$dirty" class = "help-block">יש להזין דרגה</p>
-							</div>
-							
-							<!-- Discharge date -->
-							<div class = "form-group"  ng-class = "{ 'has-error' : soldierForm.discharge.$invalid && 
-									soldierForm.discharge.$error.required }">
-								<label for = "discharge">תת"ש</label>
-								<input name = "discharge" type="text" class = "form-control" ng-model = "discharge" required>
-								<p 	class = "help-block"
-									ng-show = "soldierForm.discharge.$invalid && 
-									soldierForm.discharge.$error.required">יש להזין תת"ש</p>
-							</div>
-							
-							<button class="btn btn-default" 
-								ng-click = "addSoldier(name,age,rank,discharge)"
-								ng-disabled = "!soldierForm.rank.$dirty || 
-									!soldierForm.age.$dirty ||
-									soldierForm.discharge.$invalid ||
-									soldierForm.name.$invalid">הוספה</button>
 						</form>
 					</div>
+					
+					<div class = "modal-footer">
+						<button id = "login-button" type = "button" class = "btn btn-success btn-block">הירשם</button>
+					</div>
 				</div>
+				
 			</div>
-			
-			<!-- Soldiers table-->
-			<div class="row">
-				<table class="table table-striped col-lg-6 col-lg-offset-3">
-					<thead>
-						<tr>
-							<th>שם</th>
-							<th>גיל</th>
-							<th>דרגה</th>
-							<th>תאריך שחרור</th>
-						</tr>
-					</thead>
-					<tr ng-repeat = "soldier in soldiersList">
-						
-						<td>{{soldier.name}}</td>
-						<td>{{soldier.age}}</td>
-						<td>{{soldier.rank}}</td>
-						<td>{{soldier.discharge}}</td>
-					</tr>
-				</table>
+		</div>
+		
+		<!-- Centered table -->
+	<div class = "container">
+		<div class = "row">
+		  <div class = "col-lg-10 col-lg-offset-1">
+			<table class = "table table-striped table-bordered table-sm">
+			<thead>
+				<tr>
+					<th class = "text-center">
+						#<span class = "glyphicon glyphicon-arrow-down"></span>
+					</th>
+					<th class = "text-center">
+						שם מלא<span class = "glyphicon glyphicon-arrow-down"></span>
+					</th>
+					<th class = "text-center">
+						מספר אישי<span class = "glyphicon glyphicon-arrow-down"></span>
+					</th>
+					<th class = "text-center">
+						מצב משפחתי<span class = "glyphicon glyphicon-arrow-down"></span>
+					</th>
+					<th class = "text-center">
+						תת"ש<span class = "glyphicon glyphicon-arrow-down">
+					</th>
+				</tr>
+			</thead>
+			<tbody class = "text-center">
+				<tr>
+				  <th scope = "row" class = "text-center">1</th>
+				  <td>ישראל ישראלי</td>
+				  <td>000000</td>
+				  <td>רווק</td>
+				  <td>1.1.2089</td>
+				</tr>
+				<tr>
+				  <th scope = "row"  class = "text-center">2</th>
+				  <td>אבי אביהו</td>
+				  <td>1111111</td>
+				  <td>מאורס</td>
+				  <td>2.2.2090</td>
+				</tr>
+				<tr>
+				  <th scope = "row"  class = "text-center">3</th>
+				  <td>מיכאל מיכאלי</td>
+				  <td>2222222</td>
+				  <td>נשוי</td>
+				  <td>3.3.2091</td>
+				</tr>
+			</tbody>
+			</table>
+		  </div>
+		</div>
+		
+		<!-- Pagination -->
+		<div class = "row">
+			<div class = "text-center">
+				<ul class = "pagination">
+				  <li><a href = "#">1</a></li>
+				  <li><a href = "#">2</a></li>
+				  <li><a href = "#">3</a></li>
+				  <li><a href = "#">4</a></li>
+				  <li><a href = "#">5</a></li>
+				</ul>
 			</div>
-			
 		</div>
       
-      <script src = "./src/main.js"></script>
-      <script src = "./src/lib/lodash.min.js"></script>
-	  <script src = "./src/lib/jquery.min.js"></script>
-	  <script src = "./src/lib/bootstrap.min.js"></script>
+		<script src = "./src/main.js"></script>
+		<script src = "./src/lib/lodash.min.js"></script>
+		<script src = "./src/lib/jquery.min.js"></script>
+		<script src = "./src/lib/bootstrap.min.js"></script>
    </body>
 </html>
