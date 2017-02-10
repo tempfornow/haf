@@ -16,7 +16,7 @@
 
 (function(angular) {
   'use strict';
-angular.module('myapp', [])
+angular.module('myapp', ['ngMessages'])
   .controller('Controller', ['$scope', function($scope) {
         $scope.customer = {
           name: 'Naomi',

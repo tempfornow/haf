@@ -1,27 +1,29 @@
 <form name = "loginForm">
     
     <!-- Username -->
-    <div class = "form-group" ng-class = "{ 'has-error' : loginForm.username.$invalid && 
-            loginForm.username.$error.required }">
+    <div class = "form-group" ng-class = "{ 'has-error' : loginForm.username.$invalid}">
         <label>שם משתמש:</label>
-        <input name = "username" type = "text" class="form-control" ng-model = "username" 
-            placeholder = "שם משתמש" required>
-        <p 	class = "help-block"
-            ng-show = "	 
-            loginForm.username.$invalid && 
-            loginForm.username.$error.required">יש להזין שם משתמש</p>
+        <input name = "username" type = "text" class="form-control" ng-model = "login.username" 
+            placeholder = "שם משתמש" ng-pattern = "/^[a-zA-Z0-9]*$/" required>
+        
+        <div class ="help-block" ng-messages="loginForm.username.$error" role="alert">
+            <p ng-message="required">יש להזין שם משתמש</p> 
+            <p ng-message="pattern">על שם המשתמש להכיל אותיות ומספרים בלבד</p> 
+        </div>
     </div>
 
     <!-- Password -->
-    <div class = "form-group" ng-class = "{ 'has-error' : loginForm.password.$invalid && 
-            loginForm.password.$error.required }">
+    <div class = "form-group" ng-class = "{ 'has-error' : loginForm.password.$invalid}">
         <label>סיסמה:</label>
-        <input name = "password" type = "password" class="form-control" ng-model = "password" 
-            placeholder = "סיסמה" required>
-        <p 	class = "help-block"
-            ng-show = "	 
-            loginForm.password.$invalid && 
-            loginForm.password.$error.required">יש להזין סיסמה</p>
+        <input name = "password" type = "password" class="form-control" ng-model = "login.password" 
+            placeholder = "סיסמה" ng-minlength = "8" ng-pattern = "/^[^\s]*$/" required>
+        
+        <div class ="help-block" ng-messages = "loginForm.password.$error" role="alert">
+            <p ng-message = "minlength,required">יש להזין סיסמה באורך 8 לפחות!</p> 
+            <p ng-message = "pattern">אין להקיש רווחים בסיסמה</p> 
+        </div>
+
+        
     </div>
 
 </form>

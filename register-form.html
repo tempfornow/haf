@@ -1,58 +1,55 @@
 <form name = "registerForm">
 							
     <!-- Username -->
-    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.username.$invalid && 
-            registerForm.username.$error.required }">
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.username.$invalid}">
         <label>שם משתמש:</label>
-        <input name = "username" type = "text" class="form-control" ng-model = "username" 
-            placeholder = "שם משתמש" required>
-        <p 	class = "help-block"
-            ng-show = "	 
-            registerForm.username.$invalid && 
-            registerForm.username.$error.required">יש להזין שם משתמש</p>
+        <input name = "username" type = "text" class="form-control" ng-model = "register.username" 
+            placeholder = "שם משתמש" ng-pattern = "/^[a-zA-Z0-9]*$/" required>
+        <div class ="help-block" ng-messages="registerForm.username.$error" role="alert">
+            <p ng-message="required">יש להזין שם משתמש</p> 
+            <p ng-message="pattern">על שם המשתמש להכיל אותיות ומספרים בלבד</p> 
+        </div>
     </div>
 
     <!-- Password -->
-    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.password.$invalid && 
-            registerForm.password.$error.required }">
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.password.$invalid}">
         <label>סיסמה:</label>
-        <input name = "password" type = "password" class="form-control" ng-model = "password" 
-            placeholder = "סיסמה" required>
-        <p 	class = "help-block"
-            ng-show = "	 
-            registerForm.password.$invalid && 
-            registerForm.password.$error.required">יש להזין סיסמה</p>
+        <input name = "password" type = "password" class="form-control" ng-model = "register.password" 
+            placeholder = "סיסמה" ng-minlength  = "8" ng-pattern = "/^[^\s]*$/" required>
+        <div class ="help-block" ng-messages = "registerForm.password.$error" role="alert">
+            <p ng-message = "minlength,required">יש להזין סיסמה באורך 8 לפחות!</p> 
+            <p ng-message = "pattern">אין להקיש רווחים בסיסמה</p> 
+        </div>
     </div>
 
     <!-- Name -->
-    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.name.$invalid && 
-            registerForm.name.$error.required }">
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.name.$invalid}">
         <label>שם פרטי:</label>
-        <input name = "name" type = "text" class="form-control" ng-model = "name" 
-            placeholder = "שם פרטי" required>
-        <p 	class = "help-block"
-            ng-show = "	 
-            registerForm.name.$invalid && 
-            registerForm.name.$error.required">יש להזין שם פרטי</p>
+        <input name = "name" type = "text" class="form-control" ng-model = "register.name" 
+            placeholder = "שם פרטי" ng-pattern = "/^[a-zA-Z]*$/" required>
+        <div class ="help-block" ng-messages = "registerForm.name.$error" role="alert">
+            <p ng-message = "required">יש להזין שם פרטי</p> 
+            <p ng-message = "pattern">על השם הפרטי להכיל אותיות בלבד</p> 
+        </div>
+        
     </div>
 
     <!-- Surname -->
-    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.surname.$invalid && 
-            registerForm.surname.$error.required }">
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.surname.$invalid}">
         <label>שם משפחה:</label>
-        <input name = "surname" type = "text" class="form-control" ng-model = "surname" 
-            placeholder = "שם משפחה" required>
-        <p 	class = "help-block"
-            ng-show = "	 
-            registerForm.surname.$invalid && 
-            registerForm.surname.$error.required">יש להזין שם משפחה:</p>
+        <input name = "surname" type = "text" class="form-control" ng-model = "register.surname" 
+            placeholder = "שם משפחה" ng-pattern = "/^[a-zA-Z]*$/" required>
+        <div class ="help-block" ng-messages = "registerForm.surname.$error" role="alert">
+            <p ng-message = "required">יש להזין שם משפחה</p> 
+            <p ng-message = "pattern">על שם המשפחה להכיל אותיות בלבד</p>
+        </div>
     </div>
 
     <!-- Age -->
     <div class = "form-group" ng-class = "{ 'has-error' : !registerForm.age.$dirty }">
         <label>גיל:</label>
         <select name = "age" class = "form-control input-sm" 
-            ng-options="age for age in validAges" ng-model="age"></select>
+            ng-options = "age for age in validAges" ng-model = "registr.age"></select>
         <p ng-show = "!registerForm.age.$dirty" class = "help-block">יש להזין גיל</p>	
 
     </div>
