@@ -1,0 +1,60 @@
+<form name = "registerForm">
+							
+    <!-- Username -->
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.username.$invalid && 
+            registerForm.username.$error.required }">
+        <label>שם משתמש:</label>
+        <input name = "username" type = "text" class="form-control" ng-model = "username" 
+            placeholder = "שם משתמש" required>
+        <p 	class = "help-block"
+            ng-show = "	 
+            registerForm.username.$invalid && 
+            registerForm.username.$error.required">יש להזין שם משתמש</p>
+    </div>
+
+    <!-- Password -->
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.password.$invalid && 
+            registerForm.password.$error.required }">
+        <label>סיסמה:</label>
+        <input name = "password" type = "password" class="form-control" ng-model = "password" 
+            placeholder = "סיסמה" required>
+        <p 	class = "help-block"
+            ng-show = "	 
+            registerForm.password.$invalid && 
+            registerForm.password.$error.required">יש להזין סיסמה</p>
+    </div>
+
+    <!-- Name -->
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.name.$invalid && 
+            registerForm.name.$error.required }">
+        <label>שם פרטי:</label>
+        <input name = "name" type = "text" class="form-control" ng-model = "name" 
+            placeholder = "שם פרטי" required>
+        <p 	class = "help-block"
+            ng-show = "	 
+            registerForm.name.$invalid && 
+            registerForm.name.$error.required">יש להזין שם פרטי</p>
+    </div>
+
+    <!-- Surname -->
+    <div class = "form-group" ng-class = "{ 'has-error' : registerForm.surname.$invalid && 
+            registerForm.surname.$error.required }">
+        <label>שם משפחה:</label>
+        <input name = "surname" type = "text" class="form-control" ng-model = "surname" 
+            placeholder = "שם משפחה" required>
+        <p 	class = "help-block"
+            ng-show = "	 
+            registerForm.surname.$invalid && 
+            registerForm.surname.$error.required">יש להזין שם משפחה:</p>
+    </div>
+
+    <!-- Age -->
+    <div class = "form-group" ng-class = "{ 'has-error' : !registerForm.age.$dirty }">
+        <label>גיל:</label>
+        <select name = "age" class = "form-control input-sm" 
+            ng-options="age for age in validAges" ng-model="age"></select>
+        <p ng-show = "!registerForm.age.$dirty" class = "help-block">יש להזין גיל</p>	
+
+    </div>
+
+</form>

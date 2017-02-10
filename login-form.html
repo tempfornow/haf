@@ -1,0 +1,27 @@
+<form name = "loginForm">
+    
+    <!-- Username -->
+    <div class = "form-group" ng-class = "{ 'has-error' : loginForm.username.$invalid && 
+            loginForm.username.$error.required }">
+        <label>שם משתמש:</label>
+        <input name = "username" type = "text" class="form-control" ng-model = "username" 
+            placeholder = "שם משתמש" required>
+        <p 	class = "help-block"
+            ng-show = "	 
+            loginForm.username.$invalid && 
+            loginForm.username.$error.required">יש להזין שם משתמש</p>
+    </div>
+
+    <!-- Password -->
+    <div class = "form-group" ng-class = "{ 'has-error' : loginForm.password.$invalid && 
+            loginForm.password.$error.required }">
+        <label>סיסמה:</label>
+        <input name = "password" type = "password" class="form-control" ng-model = "password" 
+            placeholder = "סיסמה" required>
+        <p 	class = "help-block"
+            ng-show = "	 
+            loginForm.password.$invalid && 
+            loginForm.password.$error.required">יש להזין סיסמה</p>
+    </div>
+
+</form>
