@@ -17,12 +17,6 @@
 (function(angular) {
   'use strict';
 angular.module('myapp', ['ngMessages'])
-  .controller('Controller', ['$scope', function($scope) {
-        $scope.customer = {
-          name: 'Naomi',
-          address: '1600 Amphitheatre'
-        };
-    }])
     .directive('loginForm', function() {
         return {
           templateUrl: 'login-form.html'
@@ -59,15 +53,24 @@ angular.module('myapp', ['ngMessages'])
             return (_.some(store.getAll(), {username, password}))
         }
         
+        this.getAll = function() {
+            return _.toArray(store.getAll())
+        }
+        
     })
     .controller('registerController', ['$scope','usersService', function($scope, usersService) {
+//        Range of valid ages for registration
         $scope.validAges = _.range(18,121)
+        
+//        Marks if the username is already taken
+        $scope.isUserAvail = true
+        
         $scope.register = function(userData) {
             usersService.addUser(userData)
         }
     }])
     .controller('loginController', function($scope, usersService) {
-        $scope.isAuth = false
+        
         $scope.user = ""
         
         $scope.login = function(username, password) {
@@ -80,6 +83,11 @@ angular.module('myapp', ['ngMessages'])
         $scope.logout = function() {
             $scope.isAuth = false
             $scope.user = ""
+        }
+    })
+    .controller('tableController', function($scope, usersService) {
+        $scope.getUsers = function() {
+            return usersService.getAll()
         }
     })
     

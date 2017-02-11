@@ -9,10 +9,6 @@
    </head>
    
    <body ng-app = "myapp">
-    
-        <div controller= "registerController">
-            
-        </div>
 		
         <div ng-controller="loginController">
             <!-- Navigation bar -->
@@ -31,6 +27,28 @@
     <!--                        Login form-->
                             <login-form></login-form>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Users table -->
+            <div class = "container" ng-if = "isAuth">
+                <div class = "row">
+                  <div class = "col-lg-10 col-lg-offset-1">
+                    <users-table></users-table>
+                  </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class = "row">
+                    <div class = "text-center">
+                        <ul class = "pagination">
+                          <li><a href = "#">1</a></li>
+                          <li><a href = "#">2</a></li>
+                          <li><a href = "#">3</a></li>
+                          <li><a href = "#">4</a></li>
+                          <li><a href = "#">5</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -53,27 +71,7 @@
 			</div>
 		</div>
 		
-		<!-- Users table -->
-        <div class = "container">
-            <div class = "row">
-              <div class = "col-lg-10 col-lg-offset-1">
-                <users-table></users-table>
-              </div>
-            </div>
-
-            <!-- Pagination -->
-            <div class = "row">
-                <div class = "text-center">
-                    <ul class = "pagination">
-                      <li><a href = "#">1</a></li>
-                      <li><a href = "#">2</a></li>
-                      <li><a href = "#">3</a></li>
-                      <li><a href = "#">4</a></li>
-                      <li><a href = "#">5</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+		
        
 		<script src = "./src/main.js"></script>
 		<script src = "./src/lib/lodash.min.js"></script>

@@ -1,44 +1,27 @@
 <table class = "table table-striped table-bordered table-sm">
     <thead>
         <tr>
+          
             <th class = "text-center">
-                #<span class = "glyphicon glyphicon-arrow-down"></span>
+                שם משתמש<span class = "glyphicon glyphicon-arrow-down"></span>
             </th>
             <th class = "text-center">
-                שם מלא<span class = "glyphicon glyphicon-arrow-down"></span>
+                שם פרטי<span class = "glyphicon glyphicon-arrow-down"></span>
             </th>
             <th class = "text-center">
-                מספר אישי<span class = "glyphicon glyphicon-arrow-down"></span>
+                שם משפחה<span class = "glyphicon glyphicon-arrow-down"></span>
             </th>
             <th class = "text-center">
-                מצב משפחתי<span class = "glyphicon glyphicon-arrow-down"></span>
-            </th>
-            <th class = "text-center">
-                תת"ש<span class = "glyphicon glyphicon-arrow-down">
+                גיל<span class = "glyphicon glyphicon-arrow-down"></span>
             </th>
         </tr>
     </thead>
-    <tbody class = "text-center">
-        <tr>
-          <th scope = "row" class = "text-center">1</th>
-          <td>ישראל ישראלי</td>
-          <td>000000</td>
-          <td>רווק</td>
-          <td>1.1.2089</td>
-        </tr>
-        <tr>
-          <th scope = "row"  class = "text-center">2</th>
-          <td>אבי אביהו</td>
-          <td>1111111</td>
-          <td>מאורס</td>
-          <td>2.2.2090</td>
-        </tr>
-        <tr>
-          <th scope = "row"  class = "text-center">3</th>
-          <td>מיכאל מיכאלי</td>
-          <td>2222222</td>
-          <td>נשוי</td>
-          <td>3.3.2091</td>
+    <tbody class = "text-center" ng-controller = "tableController" >
+        <tr ng-repeat = "user in getUsers()">
+          <th scope = "row" class = "text-center">{{user.username}}</th>
+          <td>{{user.firstname}}</td>
+          <td>{{user.surname}}</td>
+          <td>{{user.age}}</td>
         </tr>
     </tbody>
 </table>
