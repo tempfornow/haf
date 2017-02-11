@@ -1,3 +1,4 @@
+
 <nav class = "navbar navbar-inverse ">
     <div class = "container-fluid">
         <div class = "navbar-header">
@@ -13,7 +14,8 @@
             <a class = "navbar-brand" href = "#">Mamram</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="myNavbar">
+<!--        Unauthenticated navbar body-->
+        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!isAuth">
             <ul class = "nav navbar-nav">
                 <button type = "button" class = "btn btn-primary navbar-btn" 
                     data-toggle = "modal" data-target = "#login-modal">התחבר</button>
@@ -24,5 +26,15 @@
                 <button type = "button" class = "btn btn-info navbar-btn">?</button>
             </ul>
         </div>
+        
+<!--        Authenticated navbar body-->
+        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "isAuth">
+            <ul class = "nav navbar-nav">
+                <button  ng-click = "logout()" type = "button" class = "btn btn-primary navbar-btn">התנתק</button>
+            </ul>
+            <ul class = "nav navbar-nav navbar-left">
+                <button type = "button" class = "btn btn-info navbar-btn">Hello {{user}}</button>
+            </ul>
+        </div>        
     </div>
 </nav>

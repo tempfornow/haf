@@ -43,4 +43,44 @@ angular.module('myapp', ['ngMessages'])
           templateUrl: 'users-table.html'
         };
     })
+    .service('usersService', function(){
+    
+        this.addUser = function(userData) {
+           var username = userData.username
+           if(store.has(username)) {
+               return false
+           } else {
+               store.set(username, userData)
+               return true
+           }
+        }
+        
+        this.login = function(username, password) {
+            return (_.some(store.getAll(), {username, password}))
+        }
+        
+    })
+    .controller('registerController', ['$scope','usersService', function($scope, usersService) {
+        $scope.validAges = _.range(18,121)
+        $scope.register = function(userData) {
+            usersService.addUser(userData)
+        }
+    }])
+    .controller('loginController', function($scope, usersService) {
+        $scope.isAuth = false
+        $scope.user = ""
+        
+        $scope.login = function(username, password) {
+            $scope.isAuth = usersService.login(username, password)
+            $scope.user = username
+            console.log($scope.isAuth)
+            
+        }
+        
+        $scope.logout = function() {
+            $scope.isAuth = false
+            $scope.user = ""
+        }
+    })
+    
 })(window.angular);
