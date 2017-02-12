@@ -16,7 +16,7 @@
 
 (function(angular) {
   'use strict';
-angular.module('myapp', ['ngMessages'])
+angular.module('myapp', ['ngMessages','ui.bootstrap'])
     .directive('loginForm', function() {
         return {
           templateUrl: 'login-form.html'
