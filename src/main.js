@@ -90,5 +90,13 @@ angular.module('myapp', ['ngMessages'])
             return usersService.getAll()
         }
     })
+    .directive('temp', function() {
+        return {
+            restrict: 'A',
+            link: function($scope,e) {
+                console.log(e.parent())
+            }
+        }
+    })
     
 })(window.angular);
