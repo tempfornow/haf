@@ -37,12 +37,12 @@
             <!-- Users table -->
             <div class = "container" ng-if = "isAuth">
                 <div class = "row">
-                  <div class = "col-lg-10 col-lg-offset-1">
-                    <users-table></users-table>
-                  </div>
+                    <div class = "col-lg-10 col-lg-offset-1">
+                        <users-table></users-table>
+                    </div>
                 </div>
-
-                <!-- Pagination -->
+                
+<!--
                 <div class = "row">
                     <div class = "text-center">
                         <ul class = "pagination">
@@ -54,6 +54,7 @@
                         </ul>
                     </div>
                 </div>
+-->
             </div>
        </div>
 		
@@ -73,13 +74,13 @@
 				</div>
 			</div>
 		</div>
-		
-         <ul uib-pagination boundary-links="true" total-items="12" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
-       
-		<script src = "./src/main.js"></script>
-		<script src = "./src/lib/lodash.min.js"></script>
-		<script src = "./src/lib/jquery.min.js"></script>
-		<script src = "./src/lib/bootstrap.min.js"></script>
-		<script src = "./src/lib/store.min.js"></script>
-   </body>
+
+
+        <script src = "./src/main.js"></script>
+        <script src = "./src/lib/lodash.min.js"></script>
+        <script src = "./src/lib/jquery.min.js"></script>
+        <script src = "./src/lib/bootstrap.min.js"></script>
+        <script src = "./src/lib/store.min.js"></script>
+        <script src = "./deb.js"></script>
+    </body>
 </html>

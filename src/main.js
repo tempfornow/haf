@@ -72,12 +72,12 @@ angular.module('myapp', ['ngMessages','ui.bootstrap'])
     .controller('loginController', function($scope, usersService) {
         
         $scope.user = ""
-        
+        $scope.isAuth = false
         $scope.login = function(username, password) {
             $scope.isAuth = usersService.login(username, password)
             $scope.user = username
             console.log($scope.isAuth)
-            
+            ""
         }
         
         $scope.logout = function() {
@@ -85,18 +85,39 @@ angular.module('myapp', ['ngMessages','ui.bootstrap'])
             $scope.user = ""
         }
     })
-    .controller('tableController', function($scope, usersService) {
-        $scope.getUsers = function() {
-            return usersService.getAll()
-        }
-    })
-    .directive('temp', function() {
-        return {
-            restrict: 'A',
-            link: function($scope,e) {
-                console.log(e.parent())
-            }
-        }
-    })
-    
+    .controller('tableController', ['$scope','usersService', function($scope, usersService) {
+         $scope.currentPage = 1
+         $scope.itemsPerPage = 5    
+         $scope.totalItems = usersService.getAll().length
+         
+         $scope.order = 'asc'
+         $scope.sortAttr = 'username'
+         
+         $scope.currChunk = _.chunk(usersService.getAll(),$scope.itemsPerPage)[$scope.currentPage- 1]
+         
+         $scope.setCurrentChunk = function() {
+             $scope.currChunk = _.chunk(_.orderBy(usersService.getAll(),$scope.sortAttr,$scope.order),
+                                    $scope.itemsPerPage)[$scope.currentPage- 1]
+         }
+        
+         $scope.pageChanged = function() {             
+             $scope.totalItems = usersService.getAll().length
+             console.log('Page changed to: ' + $scope.currentPage);
+             $scope.setCurrentChunk()
+         }
+         
+         $scope.sortBy = function(attr) {
+             var currOrder = $scope.order
+             
+             if($scope.sortAttr === attr) {
+                 $scope.order = (currOrder === "asc") ? "desc" : "asc"
+             } else {
+                 $scope.sortAttr = attr
+                 $scope.order = "asc"
+             }
+             
+             $scope.totalItems = usersService.getAll().length
+             $scope.setCurrentChunk()
+         }
+    }])
 })(window.angular);

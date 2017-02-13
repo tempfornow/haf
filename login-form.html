@@ -14,12 +14,12 @@
         </div>
 
         <!-- Password -->
-        <div class = "form-group" ng-class = "{ 'has-error' : !loginForm.password.$pristine && loginForm.password.$invalid}">
+        <div class = "form-group" ng-class = "{ 'has-error' : (!loginForm.password.$pristine || loginForm.password.$touched) && loginForm.password.$invalid}">
             <label>סיסמה:</label>
             <input name = "password" type = "password" class="form-control" ng-model = "login.password" 
                 placeholder = "סיסמה" ng-minlength = "8" ng-pattern = "/^[^\s]*$/" required>
 
-            <div class ="help-block" ng-show = "!loginForm.password.$pristine" 
+            <div class ="help-block" ng-show = "!loginForm.password.$pristine || loginForm.password.$touched"
                  ng-messages = "loginForm.password.$error" role="alert">
                 <p ng-message = "minlength,required">יש להזין סיסמה באורך 8 לפחות!</p> 
                 <p ng-message = "pattern">אין להקיש רווחים בסיסמה</p> 
