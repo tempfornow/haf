@@ -1,27 +1,33 @@
-<table class = "table table-striped table-bordered table-sm">
-    <thead>
-        <tr>
-          
-            <th class = "text-center">
-                שם משתמש<span class = "glyphicon glyphicon-arrow-down"></span>
-            </th>
-            <th class = "text-center">
-                שם פרטי<span class = "glyphicon glyphicon-arrow-down"></span>
-            </th>
-            <th class = "text-center">
-                שם משפחה<span class = "glyphicon glyphicon-arrow-down"></span>
-            </th>
-            <th class = "text-center">
-                גיל<span class = "glyphicon glyphicon-arrow-down"></span>
-            </th>
-        </tr>
-    </thead>
-    <tbody class = "text-center" ng-controller = "tableController" >
-        <tr ng-repeat = "user in getUsers()">
-          <th scope = "row" class = "text-center">{{user.username}}</th>
-          <td>{{user.firstname}}</td>
-          <td>{{user.surname}}</td>
-          <td>{{user.age}}</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-controller = "tableController">
+    <table class = "table table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+
+                <th class = "text-center">
+                    שם משתמש<span class = "glyphicon glyphicon-arrow-down"></span>
+                </th>
+                <th class = "text-center">
+                    שם פרטי<span class = "glyphicon glyphicon-arrow-down"></span>
+                </th>
+                <th class = "text-center">
+                    שם משפחה<span class = "glyphicon glyphicon-arrow-down"></span>
+                </th>
+                <th class = "text-center">
+                    גיל<span class = "glyphicon glyphicon-arrow-down"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody class = "text-center">
+            <tr ng-repeat = "user in users">
+              <th scope = "row" class = "text-center">{{user.username}}</th>
+              <td>{{user.firstname}}</td>
+              <td>{{user.surname}}</td>
+              <td>{{user.age}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class = "text-center">
+        <ul uib-pagination boundary-links = "true" previous-text = "&lsaquo;" next-text = "&rsaquo;" first-text = "&laquo;" last-text = "&raquo;" total-items = "totalItems" items-per-page = "itemsPerPage" ng-model = "currentPage" ng-change="pageChanged()" ng-show = "totalItems / itemsPerPage > 1"></ul>
+    </div>
+</div>

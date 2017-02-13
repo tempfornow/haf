@@ -72,12 +72,12 @@ angular.module('myapp', ['ngMessages','ui.bootstrap'])
     .controller('loginController', function($scope, usersService) {
         
         $scope.user = ""
-        
+        $scope.isAuth = false
         $scope.login = function(username, password) {
             $scope.isAuth = usersService.login(username, password)
             $scope.user = username
             console.log($scope.isAuth)
-            
+            ""
         }
         
         $scope.logout = function() {
@@ -85,18 +85,20 @@ angular.module('myapp', ['ngMessages','ui.bootstrap'])
             $scope.user = ""
         }
     })
-    .controller('tableController', function($scope, usersService) {
-        $scope.getUsers = function() {
-            return usersService.getAll()
-        }
-    })
-    .directive('temp', function() {
-        return {
-            restrict: 'A',
-            link: function($scope,e) {
-                console.log(e.parent())
-            }
-        }
-    })
-    
+    .controller('tableController', ['$scope','usersService', function($scope, usersService) {
+         $scope.currentPage = 1
+         $scope.itemsPerPage = 5    
+         $scope.totalItems = usersService.getAll().length
+         
+         $scope.users = _.chunk(usersService.getAll(),$scope.itemsPerPage)[$scope.currentPage- 1]
+         
+         $scope.pageChanged = function() {
+//             Calculating the chunk to be displayed 
+             $scope.users = _.chunk(usersService.getAll(),$scope.itemsPerPage)[$scope.currentPage- 1]
+             
+//             Update number of users(usefull in case users number changed)
+             $scope.totalItems = usersService.getAll().length
+             console.log('Page changed to: ' + $scope.currentPage);
+         }
+    }])
 })(window.angular);
