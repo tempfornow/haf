@@ -15,12 +15,11 @@
         </div>
 
 <!--        Unauthenticated navbar body-->
-        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!isAuth">
+        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!isAuth" ng-controller = "RegisterModalCtrl as $ctrl">
             <ul class = "nav navbar-nav">
                 <button type = "button" class = "btn btn-primary navbar-btn" 
                     data-toggle = "modal" data-target = "#login-modal">התחבר</button>
-                <button type = "button" class = "btn btn-primary navbar-btn"
-                    data-toggle = "modal" 	data-target = "#register-modal">הרשמה</button>
+                    <button type="button" class = "btn btn-primary navbar-btn" ng-click = "$ctrl.open('sm')">הרשמה</button>
             </ul>
             <ul class = "nav navbar-nav navbar-left">
                 <button type = "button" class = "btn btn-info navbar-btn">?</button>

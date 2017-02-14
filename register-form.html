@@ -1,4 +1,4 @@
-<div ng-controller = "registerController">
+<!--<div ng-controller = "registerController">-->
 
     <form novalidate name = "registerForm">
 
@@ -54,17 +54,17 @@
         <div class = "form-group" ng-class = "{ 'has-error' : (!registerForm.age.$pristine || registerForm.age.$touched)&& !registerForm.age.$dirty }">
             <label>גיל:</label>
             <select name = "age" class = "form-control input-sm" 
-                ng-options = "age for age in validAges" ng-model = "user.age"></select>
+                ng-options = "age for age in $ctrl.validAges" ng-model = "user.age"></select>
             <p ng-show = "(!registerForm.age.$pristine || registerForm.age.$touched) && !registerForm.age.$dirty" 
                class = "help-block">יש להזין גיל</p>	
 
         </div>
         
-        <div class = "alert alert-danger text-center" ng-show = "isUserAvail">שם המשתמש כבר קיים!</div>
+        <div class = "alert alert-danger text-center" ng-show = "!$ctrl.isUserAvail">שם המשתמש כבר קיים!</div>
 
-        <button id = "login-button" type = "submit" ng-click = "register(user)" 
+        <button id = "login-button" type = "submit" ng-click = "$ctrl.register(user)" 
                 ng-disabled = "registerForm.$invalid" class = "btn btn-success btn-block">הירשם</button>
 
 <!--        <pre>{{user | json}}</pre>-->
     </form>
-</div>
+<!--</div>-->
