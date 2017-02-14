@@ -59,6 +59,8 @@
                class = "help-block">יש להזין גיל</p>	
 
         </div>
+        
+        <div class = "alert alert-danger text-center" ng-show = "isUserAvail">שם המשתמש כבר קיים!</div>
 
         <button id = "login-button" type = "submit" ng-click = "register(user)" 
                 ng-disabled = "registerForm.$invalid" class = "btn btn-success btn-block">הירשם</button>

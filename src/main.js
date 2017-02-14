@@ -63,10 +63,16 @@ angular.module('myapp', ['ngMessages','ui.bootstrap'])
         $scope.validAges = _.range(18,121)
         
 //        Marks if the username is already taken
-        $scope.isUserAvail = true
+        $scope.isUserAvail = false
         
         $scope.register = function(userData) {
-            usersService.addUser(userData)
+            if(!usersService.addUser(userData)) {
+                console.log("username",userData.username,"already taken")
+                $scope.isUserAvail = true
+            } else {
+                console.log("username",userData.username,"added")
+                $scope.isUserAvail = false
+            }
         }
     }])
     .controller('loginController', function($scope, usersService) {
