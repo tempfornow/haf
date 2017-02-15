@@ -1,6 +1,6 @@
 (function(angular) {
     'use strict';
-    angular.module('myapp', ['ngMessages','ngAnimate','ngRoute', 'ngSanitize','ui.bootstrap']) 
+    angular.module('myapp', ['ngMessages','ngAnimate','ngRoute', 'ngSanitize','ui.bootstrap'])
     .run(function ($rootScope) {
         $rootScope.user = "";
     })
@@ -13,7 +13,7 @@
         return {
           templateUrl: './templates/register-form.html'
         };
-    })    
+    })
     .directive('myNavbar', function() {
         return {
           templateUrl: './templates/my-navbar.html'
@@ -26,8 +26,9 @@
     })
     .service('usersService', usersService)
     .controller('tableController', tableController)
-//    .controller('LoginModalCtrl', LoginModalCtrl)
+    .controller('LoginModalCtrl', LoginModalCtrl)
     .controller('loginController', loginController)
     .controller('RegisterModalCtrl', RegisterModalCtrl)
     .controller('registerController', registerController)
+    .controller('navController', navController)
 })(window.angular);

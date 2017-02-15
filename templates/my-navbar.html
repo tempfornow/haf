@@ -15,25 +15,29 @@
         </div>
 
 <!--        Unauthenticated navbar body-->
-        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!user" ng-controller = "RegisterModalCtrl as $ctrl">
+        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!user">
             <ul class = "nav navbar-nav">
-                <button type = "button" class = "btn btn-primary navbar-btn" 
-                    data-toggle = "modal" data-target = "#login-modal">התחבר</button>
+                <span ng-controller = "LoginModalCtrl as $ctrl">
+                    <button type = "button" class = "btn btn-primary navbar-btn"
+                    ng-click = "$ctrl.open('sm')">התחבר</button>
+                </span>
+                <span ng-controller = "RegisterModalCtrl as $ctrl">
                     <button type="button" class = "btn btn-primary navbar-btn" ng-click = "$ctrl.open('sm')">הרשמה</button>
+                </span>
             </ul>
             <ul class = "nav navbar-nav navbar-left">
                 <button type = "button" class = "btn btn-info navbar-btn">?</button>
             </ul>
         </div>
-        
+
 <!--        Authenticated navbar body-->
-        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "user">
-            <ul class = "nav navbar-nav">
-                <button  ng-click = "logout()" type = "button" class = "btn btn-primary navbar-btn">התנתק</button>
-            </ul>
-            <ul class = "nav navbar-nav navbar-left">
-                <button type = "button" class = "btn btn-info navbar-btn">Hello {{user}}</button>
-            </ul>
-        </div>        
+            <div class="collapse navbar-collapse" id="myNavbar" ng-if = "user" ng-controller = "navController">
+                <ul class = "nav navbar-nav">
+                    <button  ng-click = "logout()" type = "button" class = "btn btn-primary navbar-btn">התנתק</button>
+                </ul>
+                <ul class = "nav navbar-nav navbar-left">
+                    <button type = "button" class = "btn btn-info navbar-btn">Hello {{user}}</button>
+                </ul>
+            </div>
     </div>
 </nav>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-   
+
    <head>
         <script src = "./src/lib/angular.min.js"></script>
         <script src = "./src/lib/angular-messages.min.js"></script>
@@ -12,70 +12,34 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-rtl.min.css">
    </head>
-   
+
    <body ng-app = "myapp">
-		
-        <div ng-controller="loginController">
-            <!-- Navigation bar -->
-            <my-navbar></my-navbar>
-            
-            <!-- Login modal -->
-            <div id  =  "login-modal" class = "modal fade" role = "dialog">
-                <div class = "modal-dialog modal-sm">
-                    <div class = "modal-content">
-                        <div class = "modal-header">
 
-                            <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
-                            <h4 class = "modal-title text-center">התחברות</h4>
-                        </div>
-                        <div class = "modal-body">
-    <!--                        Login form-->
-                            <login-form></login-form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Users table -->
-            <div class = "container" ng-if = "user">
-                <div class = "row">
-                    <div class = "col-lg-10 col-lg-offset-1">
-                        <users-table></users-table>
-                    </div>
-                </div>
-                
+      <!-- Navigation bar -->
+      <my-navbar></my-navbar>
 
-            </div>
-       </div>
-		
-		<!-- Registration modal -->
-		<div id  =  "register-modal" class = "modal fade" role = "dialog">
-			<div class = "modal-dialog modal-sm">
-				<div class = "modal-content">
-					<div class = "modal-header">
-						
-						<button type = "button" class = "close" data-dismiss = "modal">&times;</button>
-						<h4 class = "modal-title text-center">הרשמה</h4>
-					</div>
-					<div class = "modal-body">
-<!--                        Registration form-->
-						<register-form></register-form>
-					</div>
-				</div>
-			</div>
-		</div>
-       
 
-        <script src= "./controllers/loginController.js"></script>
-        <script src= "./controllers/tableController.js"></script>
-        <script src= "./controllers/usersService.js"></script>
-        <script src= "./controllers/RegisterModalCtrl.js"></script>
-        <script src= "./controllers/registerController.js"></script>
-        <script src = "./src/main.js"></script>
-        <script src = "./src/lib/lodash.min.js"></script>
-        <script src = "./src/lib/jquery.min.js"></script>
-        <script src = "./src/lib/bootstrap.min.js"></script>
-        <script src = "./src/lib/store.min.js"></script>
-        <script src = "./deb.js"></script>
+      <!-- Users table -->
+      <div class = "container" ng-if = "user">
+          <div class = "row">
+              <div class = "col-lg-10 col-lg-offset-1">
+                  <users-table></users-table>
+              </div>
+          </div>
+      </div>
+
+      <script src = "./controllers/loginController.js"></script>
+      <script src = "./controllers/tableController.js"></script>
+      <script src = "./controllers/usersService.js"></script>
+      <script src = "./controllers/RegisterModalCtrl.js"></script>
+      <script src = "./controllers/LoginModalCtrl.js"></script>
+      <script src = "./controllers/registerController.js"></script>
+      <script src = "./controllers/navController.js"></script>
+      <script src = "./src/main.js"></script>
+      <script src = "./src/lib/lodash.min.js"></script>
+      <script src = "./src/lib/jquery.min.js"></script>
+      <script src = "./src/lib/bootstrap.min.js"></script>
+      <script src = "./src/lib/store.min.js"></script>
+      <script src = "./deb.js"></script>
     </body>
 </html>
