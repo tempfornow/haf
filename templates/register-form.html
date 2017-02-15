@@ -4,8 +4,8 @@
 
         <!-- Username -->
         <div class = "form-group" ng-class = "{ 'has-error' : (!registerForm.username.$pristine ||  registerForm.username.$touched) && registerForm.username.$invalid}">
-            <label temp>שם משתמש:</label>
-            <input name = "username" type = "text" class="form-control" ng-model = "user.username" 
+            <label>שם משתמש:</label>
+            <input name = "username" type = "text" class="form-control" ng-model = "userData.username" 
                 placeholder = "שם משתמש" ng-pattern = "/^[a-zA-Z0-9]*$/" required>
             <div class ="help-block" ng-show = "!registerForm.username.$pristine || registerForm.username.$touched" ng-messages="registerForm.username.$error" role="alert">
                 <p ng-message="required">יש להזין שם משתמש</p> 
@@ -16,7 +16,7 @@
         <!-- Password -->
         <div class = "form-group" ng-class = "{ 'has-error' : (!registerForm.password.$pristine || registerForm.password.$touched) && registerForm.password.$invalid}">
             <label>סיסמה:</label>
-            <input name = "password" type = "password" class="form-control" ng-model = "user.password" 
+            <input name = "password" type = "password" class="form-control" ng-model = "userData.password" 
                 placeholder = "סיסמה" ng-minlength  = "8" ng-pattern = "/^[^\s]*$/" required>
             <div class ="help-block" ng-show = "!registerForm.password.$pristine || registerForm.password.$touched" 
                  ng-messages = "registerForm.password.$error" role="alert">
@@ -28,7 +28,7 @@
         <!-- Name -->
         <div class = "form-group" ng-class = "{ 'has-error' : (!registerForm.name.$pristine || registerForm.name.$touched) && registerForm.name.$invalid}">
             <label>שם פרטי:</label>
-            <input name = "name" type = "text" class="form-control" ng-model = "user.firstname" 
+            <input name = "name" type = "text" class="form-control" ng-model = "userData.firstname" 
                 placeholder = "שם פרטי" ng-pattern = "/^[a-zA-Z]*$/" required>
             <div class ="help-block" ng-show = "!registerForm.name.$pristine || registerForm.name.$touched"
                  ng-messages = "registerForm.name.$error" role="alert">
@@ -41,7 +41,7 @@
         <!-- Surname -->
         <div class = "form-group" ng-class = "{ 'has-error' : (!registerForm.surname.$pristine ||  registerForm.surname.$touched) && registerForm.surname.$invalid}">
             <label>שם משפחה:</label>
-            <input name = "surname" type = "text" class="form-control" ng-model = "user.surname" 
+            <input name = "surname" type = "text" class="form-control" ng-model = "userData.surname" 
                 placeholder = "שם משפחה" ng-pattern = "/^[a-zA-Z]*$/" required>
             <div class ="help-block" ng-show = "!registerForm.surname.$pristine ||  registerForm.surname.$touched"
                  ng-messages = "registerForm.surname.$error" role="alert">
@@ -54,7 +54,7 @@
         <div class = "form-group" ng-class = "{ 'has-error' : (!registerForm.age.$pristine || registerForm.age.$touched)&& !registerForm.age.$dirty }">
             <label>גיל:</label>
             <select name = "age" class = "form-control input-sm" 
-                ng-options = "age for age in $ctrl.validAges" ng-model = "user.age"></select>
+                ng-options = "age for age in $ctrl.validAges" ng-model = "userData.age"></select>
             <p ng-show = "(!registerForm.age.$pristine || registerForm.age.$touched) && !registerForm.age.$dirty" 
                class = "help-block">יש להזין גיל</p>	
 
@@ -62,7 +62,7 @@
         
         <div class = "alert alert-danger text-center" ng-show = "!$ctrl.isUserAvail">שם המשתמש כבר קיים!</div>
 
-        <button id = "login-button" type = "submit" ng-click = "$ctrl.register(user)" 
+        <button id = "login-button" type = "submit" ng-click = "$ctrl.register(userData)" 
                 ng-disabled = "registerForm.$invalid" class = "btn btn-success btn-block">הירשם</button>
 
 <!--        <pre>{{user | json}}</pre>-->

@@ -1,4 +1,5 @@
-function tableController($scope, usersService) {
+function tableController($scope, $rootScope, usersService) {
+     
      $scope.currentPage = 1
      $scope.itemsPerPage = 5    
      $scope.totalItems = usersService.getAll().length
@@ -13,13 +14,15 @@ function tableController($scope, usersService) {
                                 $scope.itemsPerPage)[$scope.currentPage- 1]
      }
 
-     $scope.pageChanged = function() {             
+     $scope.pageChanged = function() {    
+         usersService.incPagesTurn($rootScope.user)
          $scope.totalItems = usersService.getAll().length
          console.log('Page changed to: ' + $scope.currentPage);
          $scope.setCurrentChunk()
      }
 
      $scope.sortBy = function(attr) {
+         usersService.incSortNum($rootScope.user)
          var currOrder = $scope.order
 
          if($scope.sortAttr === attr) {

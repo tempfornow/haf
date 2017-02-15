@@ -1,15 +1,15 @@
-function loginController($scope, usersService) {      
-        $scope.user = ""
-        $scope.isAuth = false
+function loginController($rootScope, $scope, usersService) {  
+        console.log($rootScope)
+        $rootScope.user = ""
         $scope.login = function(username, password) {
-            $scope.isAuth = usersService.login(username, password)
-            $scope.user = username
-            console.log($scope.isAuth)
+            if(usersService.login(username, password)) {
+                $rootScope.user = username
+            }
+            console.log($rootScope.user)
         }
         
         $scope.logout = function() {
-            $scope.isAuth = false
-            $scope.user = ""
+            $rootScope.user = ""
         }
   
 }

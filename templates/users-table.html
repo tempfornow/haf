@@ -15,6 +15,17 @@
                 <th class = "text-center" ng-click = "sortBy('age')">
                     גיל<span class = "glyphicon glyphicon-arrow-down"></span>
                 </th>
+                <th class = "text-center" ng-click = "sortBy('pagesTurn')">
+                    החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
+                </th> 
+                <th class = "text-center" ng-click = "sortBy('sortNum')">
+                    מספר מיונים<span class = "glyphicon glyphicon-arrow-down"></span>
+                </th> 
+<!--
+                <th class = "text-center" ng-click = "sortBy('age')">
+                    החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
+                </th>
+-->
             </tr>
         </thead>
         <tbody class = "text-center">
@@ -23,6 +34,8 @@
               <td>{{user.firstname}}</td>
               <td>{{user.surname}}</td>
               <td>{{user.age}}</td>
+              <td>{{user.pagesTurn}}</td>
+              <td>{{user.sortNum}}</td>
             </tr>
         </tbody>
     </table>

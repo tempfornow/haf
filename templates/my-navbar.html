@@ -15,7 +15,7 @@
         </div>
 
 <!--        Unauthenticated navbar body-->
-        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!isAuth" ng-controller = "RegisterModalCtrl as $ctrl">
+        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!user" ng-controller = "RegisterModalCtrl as $ctrl">
             <ul class = "nav navbar-nav">
                 <button type = "button" class = "btn btn-primary navbar-btn" 
                     data-toggle = "modal" data-target = "#login-modal">התחבר</button>
@@ -27,7 +27,7 @@
         </div>
         
 <!--        Authenticated navbar body-->
-        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "isAuth">
+        <div class="collapse navbar-collapse" id="myNavbar" ng-if = "user">
             <ul class = "nav navbar-nav">
                 <button  ng-click = "logout()" type = "button" class = "btn btn-primary navbar-btn">התנתק</button>
             </ul>
