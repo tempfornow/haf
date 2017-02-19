@@ -6,22 +6,22 @@
     })
     .directive('loginForm', function() {
         return {
-          templateUrl: './templates/login-form.html'
+          templateUrl: './src/templates/login-form.html'
         };
     })
     .directive('registerForm', function() {
         return {
-          templateUrl: './templates/register-form.html'
+          templateUrl: './src/templates/register-form.html'
         };
     })
     .directive('myNavbar', function() {
         return {
-          templateUrl: './templates/my-navbar.html'
+          templateUrl: './src/templates/my-navbar.html'
         };
     })
     .directive('usersTable', function() {
         return {
-          templateUrl: './templates/users-table.html'
+          templateUrl: './src/templates/users-table.html'
         };
     })
     .service('usersService', usersService)

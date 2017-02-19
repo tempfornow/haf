@@ -5,13 +5,13 @@ function LoginModalCtrl($uibModal, $log, $document) {
     $ctrl.animationsEnabled = true;
 
     $ctrl.open = function (size, parentSelector) {
-          var parentElem = parentSelector ? 
+          var parentElem = parentSelector ?
           angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
           var modalInstance = $uibModal.open({
               animation: $ctrl.animationsEnabled,
               ariaLabelledBy: 'modal-title',
               ariaDescribedBy: 'modal-body',
-              templateUrl: './templates/login-modal.html',
+              templateUrl: './src/templates/login-modal.html',
               controller: 'loginController',
               controllerAs: '$ctrl',
               size: size,
