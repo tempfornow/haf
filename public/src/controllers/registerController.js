@@ -18,13 +18,18 @@ function registerController($uibModalInstance, items, usersService){
     }
     
     $ctrl.register = function(userData) {
-        if(!usersService.addUser(userData)) {
-            console.log("username",userData.username,"already taken")
-            $ctrl.isUserAvail = false
-        } else {
-            console.log("username",userData.username,"added")
-            $ctrl.isUserAvail = true
-            $uibModalInstance.close($ctrl.selected.item)
-        }
+            usersService.addUser(userData)
+            .then(function(isSuccessful) {
+                $ctrl.isUserAvail = true
+                $uibModalInstance.close($ctrl.selected.item)
+            })
+//        if(!usersService.addUser(userData)) {
+//            console.log("username",userData.username,"already taken")
+//            $ctrl.isUserAvail = false
+//        } else {
+//            console.log("username",userData.username,"added")
+//            $ctrl.isUserAvail = true
+//            $uibModalInstance.close($ctrl.selected.item)
+//        }
     }
 }

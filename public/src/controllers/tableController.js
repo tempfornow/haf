@@ -1,13 +1,23 @@
 function tableController($scope, $rootScope, usersService) {
      
      $scope.currentPage = 1
-     $scope.itemsPerPage = 5    
-     $scope.totalItems = usersService.getAll().length
+     $scope.itemsPerPage = 5
+
+     $scope.dataReady = false
+     $scope.totalItems = 0
+     $scope.currChunk =[]
 
      $scope.order = 'asc'
      $scope.sortAttr = 'username'
 
-     $scope.currChunk = _.chunk(usersService.getAll(),$scope.itemsPerPage)[$scope.currentPage- 1]
+     usersService.getAll().then(function(users) {
+        $scope.dataReady = true
+        $scope.users = users
+        $scope.currChunk = _.chunk(_.orderBy(users,$scope.sortAttr,$scope.order),
+            $scope.itemsPerPage)[$scope.currentPage- 1]
+        $scope.totalItems = users.length
+     })
+
 
      $scope.setCurrentChunk = function() {
          $scope.currChunk = _.chunk(_.orderBy(usersService.getAll(),$scope.sortAttr,$scope.order),
