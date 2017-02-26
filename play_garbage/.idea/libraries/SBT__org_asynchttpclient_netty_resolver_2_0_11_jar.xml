@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SBT: org.asynchttpclient:netty-resolver:2.0.11:jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../typesafe-activator-1.3.12/activator-dist-1.3.12/repository/org.asynchttpclient/netty-resolver/2.0.11/jars/netty-resolver.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

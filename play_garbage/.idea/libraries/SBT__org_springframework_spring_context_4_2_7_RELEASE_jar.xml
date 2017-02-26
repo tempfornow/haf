@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SBT: org.springframework:spring-context:4.2.7.RELEASE:jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../typesafe-activator-1.3.12/activator-dist-1.3.12/repository/org.springframework/spring-context/4.2.7.RELEASE/jars/spring-context.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
