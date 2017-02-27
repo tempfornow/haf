@@ -2,24 +2,15 @@ function usersService($http) {
     this.addUser = function(userData) {
 //       var username = userData.username
 
-       return $http.post('http://127.0.0.1:9000/', userData)
+       return $http.post('http://localhost:3000/', userData)
        .then(function(response) {
            console.log(response.data.body);
-           return response.data.body.isSuccessfull
+           return response.
        }, function(err) {
             return false
        })
-//       if(store.has(username)) {
-//           return false
-//       } else {
-//           userData.sortNum = 0
-//           userData.pagesTurn = 0
-//           console.log(userData)
-//           store.set(username, userData)
-//           return true
-//       }
     }
-    
+
     this.incPagesTurn = function(username) {
         store.transact(username,function(user) {user.pagesTurn++})
     }
@@ -27,11 +18,35 @@ function usersService($http) {
         store.transact(username,function(user) {user.sortNum++})
     }
     this.login = function(username, password) {
-        return (_.some(store.getAll(), {username, password}))
+        console.log(username, password)
+        var promise = $http.post('http://localhost:3000/login', {username, password})
+        .then(function(response) {
+          console.log(response)
+          if(response.data.err) {
+            return {err: 'Invalid login details'}
+          }
+
+          return {}
+        }, function(err) {
+          return {err: 'Login is temporary unavailable'}
+        })
+
+        return promise
     }
 
     this.getAll = function() {
-        return $http.get('http://127.0.0.1:9000/')
+        var promise = $http.get('http://localhost:3000/list').
+        then(function(response) {
+          console.log(response.data)
+          // if(response.data.err) {
+          //   return {err: "Users retreival is currently unavailable"}
+          // }
+          //
+          // return response.data.
+        }, function(err) {
+          return {err: "Users retreival is currently unavailable"}
+        })
+        return $http.get('http://localhost:3000/')
         .then(function(response) {
             console.log(response.data.body);
             return response.data.body;
