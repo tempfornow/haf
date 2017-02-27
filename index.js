@@ -1,45 +1,26 @@
 var express = require("express")
-var session = require('express-session');
+var session = require('express-session')
 var path = require('path')
 var _ = require("lodash")
 var bodyParser = require('body-parser')
-var Validator = require('jsonschema').Validator
-
+var validUser = require('./userSchema').validUser
 var app = express()
-var v = new Validator()
 
 
-
-// User schema
-var nameSchema = {id:"/Name", type: "string",  required: true, minLength: 1, pattern: /^[a-zA-Z]*$/}
-var userSchema = {
-  id: "/User",
-  type: "object",
-  properties: {
-    username: {type: "string", required: true, pattern: /^[a-zA-Z0-9]*$/},
-    password: {type: "string", minLength: 8, required: true,  pattern: /^[^\s]+$/},
-    firstname: {"$ref": "/Name"},
-    surname: {"$ref": "/Name"},
-    age: {type: "integer", minimum: 18, maximum: 120,  required: true},
-    pagesTurn: {type:"integer", minimum: 0,  required: true},
-    sortNum: {type:"integer", minimum: 0,  required: true},
-  },
-}
-v.addSchema(nameSchema, '/Name');
-v.addSchema(userSchema, '/User');
 
 // Add body-parser
-app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.json())       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }))
 
-var Users = {}
+//Session configuration
+app.use(session({
+    secret: '2C44-4D44-WppQ38S',
+    resave: true,
+    saveUninitialized: true
+}))
 
-
-function validUser(user) {
-  return v.validate(user, userSchema).valid
-}
 
 //Add custom code response middleware
 app.use(function(req,res,next) {
@@ -55,6 +36,34 @@ app.use(function(req,res,next) {
 
 // Set public folder
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Authentication and Authorization Middleware
+var auth = function(req, res, next) {
+  if (req.session && Users[req.session.user])
+    return next()
+  else
+    return res.sendStatus(401)
+}
+
+var Users = {
+  a: {
+    username: "a",
+    password: "123123123"
+  }
+}
+
+app.post("/login", function(req,res){
+  var username = req.body.username
+  var password = req.body.password
+  if(Users[username] && Users[username].password === password) {
+    req.session.user = username
+    res.ok("Logged in")
+  } else {
+    res.err("Login failed")
+  }
+})
+
+
 
 app.get("/", function(req,res) {
   res.redirect("/index.html")
@@ -81,7 +90,7 @@ app.post("/", function(req,res){
 
   if(Users[username]) {
     res.err("User already exists")
-    return;
+    return
   }
 
   if(validUser(user)) {
@@ -99,7 +108,7 @@ app.put("/", function(req,res){
 
   if(!Users[username]) {
     res.err("User doesn't exist")
-    return;
+    return
   }
 
   if(validUser(user)) {
@@ -112,22 +121,17 @@ app.put("/", function(req,res){
 })
 
 app.delete("/:username", function(req, res) {
-  console.log(Users)
   var username = req.params.username
 
   if(!Users[username]) {
     res.err("User " + username + " doesn't exist")
-    return;
+    return
   } else {
     delete Users[username]
-    console.log(Users)
     res.ok(Users)
   }
 })
 
 
-app.post("/login", function(req,res){
-
-})
 
 app.listen(3000)
