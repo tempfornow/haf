@@ -1,14 +1,12 @@
 function usersService($http) {
     this.addUser = function(userData) {
-//       var username = userData.username
-
-       return $http.post('http://localhost:3000/', userData)
-       .then(function(response) {
-           console.log(response.data.body);
-           return response.
-       }, function(err) {
-            return false
-       })
+      return $http.post('http://localhost:3000/', userData)
+      .then(function(response) {
+        console.log(response)
+        return response.data
+      }, function(err) {
+          return {err: "Registration is currently unavailable"}
+      })
     }
 
     this.incPagesTurn = function(username) {
