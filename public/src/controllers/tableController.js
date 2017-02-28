@@ -1,32 +1,34 @@
 function tableController($scope, $rootScope, usersService) {
-     
+
      $scope.currentPage = 1
      $scope.itemsPerPage = 5
 
      $scope.dataReady = false
-     $scope.totalItems = 0
+     $scope.totalItems = 124
      $scope.currChunk =[]
+     $scope.dataReady = false
 
      $scope.order = 'asc'
      $scope.sortAttr = 'username'
 
+     //Initialize table
      usersService.getAll().then(function(users) {
-        $scope.dataReady = true
         $scope.users = users
         $scope.currChunk = _.chunk(_.orderBy(users,$scope.sortAttr,$scope.order),
             $scope.itemsPerPage)[$scope.currentPage- 1]
-        $scope.totalItems = users.length
+        $scope.totalItems = _.keys(users).length
+        console.log($scope.totalItems)
+        $scope.dataReady = true
      })
 
 
      $scope.setCurrentChunk = function() {
-         $scope.currChunk = _.chunk(_.orderBy(usersService.getAll(),$scope.sortAttr,$scope.order),
+         $scope.currChunk = _.chunk(_.orderBy($scope.users,$scope.sortAttr,$scope.order),
                                 $scope.itemsPerPage)[$scope.currentPage- 1]
      }
 
-     $scope.pageChanged = function() {    
+     $scope.pageChanged = function() {
          usersService.incPagesTurn($rootScope.user)
-         $scope.totalItems = usersService.getAll().length
          console.log('Page changed to: ' + $scope.currentPage);
          $scope.setCurrentChunk()
      }
@@ -42,7 +44,7 @@ function tableController($scope, $rootScope, usersService) {
              $scope.order = "asc"
          }
 
-         $scope.totalItems = usersService.getAll().length
+         $scope.totalItems = $scope.users.length
          $scope.setCurrentChunk()
      }
 }

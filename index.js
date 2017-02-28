@@ -4,6 +4,7 @@ var path = require('path')
 var _ = require("lodash")
 var bodyParser = require('body-parser')
 var validUser = require('./userSchema').validUser
+var randomUser = require('./public/deb').randomUser
 var app = express()
 
 
@@ -46,11 +47,22 @@ var auth = function(req, res, next) {
 }
 
 var Users = {
-  a: {
-    username: "a",
-    password: "123123123"
+  new: {
+    username: "new",
+    password: "alkalkalk",
+    firstname: "la",
+    surname: "sd",
+    age: 20,
+    pagesTurn: 0,
+    sortNum: 0
   }
 }
+
+for( i in _.range(4)) {
+  var user = randomUser()
+  Users[user.username] = user
+}
+console.log(Users)
 
 app.post("/login", function(req,res){
   var username = req.body.username

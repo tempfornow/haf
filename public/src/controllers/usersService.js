@@ -35,20 +35,12 @@ function usersService($http) {
     this.getAll = function() {
         var promise = $http.get('http://localhost:3000/list').
         then(function(response) {
-          console.log(response.data)
-          // if(response.data.err) {
-          //   return {err: "Users retreival is currently unavailable"}
-          // }
-          //
-          // return response.data.
+          console.log(response)
+          return response.data
         }, function(err) {
           return {err: "Users retreival is currently unavailable"}
         })
-        return $http.get('http://localhost:3000/')
-        .then(function(response) {
-            console.log(response.data.body);
-            return response.data.body;
-        })
-//        return _.toArray(store.getAll())
+
+        return promise
     }
 }

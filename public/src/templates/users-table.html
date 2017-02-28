@@ -1,6 +1,6 @@
 <div ng-controller = "tableController">
-    <table class = "table table-striped table-bordered table-sm"
-           ng-close = "dataReady">
+    <div class = "alert alert-success text-center" ng-show = "!dataReady">Loading users table...</div>
+    <table class = "table table-striped table-bordered table-sm" ng-show = "dataReady">
         <thead>
             <tr>
 
@@ -18,10 +18,10 @@
                 </th>
                 <th class = "text-center" ng-click = "sortBy('pagesTurn')">
                     החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th> 
+                </th>
                 <th class = "text-center" ng-click = "sortBy('sortNum')">
                     מספר מיונים<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th> 
+                </th>
 <!--
                 <th class = "text-center" ng-click = "sortBy('age')">
                     החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
