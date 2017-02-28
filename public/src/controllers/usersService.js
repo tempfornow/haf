@@ -43,4 +43,19 @@ function usersService($http) {
 
         return promise
     }
+
+    this.getChunk = function(query) {
+        // convert query json to standart get request
+        // query(for instance ?a=12&b=sdsd)
+        console.log('http://localhost:3000/list?'+ $.param(query))
+        var promise = $http.get('http://localhost:3000/list?'+ $.param(query)).
+        then(function(response) {
+          console.log(response)
+          return response.data
+        }, function(err) {
+          return {err: "Users retreival is currently unavailable"}
+        })
+
+        return promise
+    }
 }

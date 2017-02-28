@@ -58,7 +58,7 @@ var Users = {
   }
 }
 
-for( i in _.range(4)) {
+for( i in _.range(5)) {
   var user = randomUser()
   Users[user.username] = user
 }
@@ -82,8 +82,27 @@ app.get("/", function(req,res) {
 })
 
 app.get("/list", function(req, res) {
-  res.ok(Users)
+  var query = req.query
+  var page = query.page
+  var itemsPerPage = query.itemsPerPage
+  var sort = {
+    attr: query.attr,
+    order: query.order
+  }
+
+  console.log()
+
+  var chunk = _.chunk(
+    _.orderBy(Users,sort.attr,sort.order),
+    itemsPerPage
+  )[page - 1]
+
+  // console.log(chunk)
+  res.ok({chunk,totalItems: _.keys(Users).length})
+
+  // //TODO:Validate query structure
 })
+
 
 app.get("/:username", function(req,res) {
   var username = req.params.username
