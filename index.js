@@ -75,6 +75,21 @@ app.post("/login", function(req,res){
   }
 })
 
+app.post("/auth/logout", function(req,res){
+  if(req.session) {
+    req.session.destroy()
+    res.ok("logout success!")
+  }
+})
+app.post("/auth/identity", function(req,res){
+  if(req.session) {
+    res.ok({username: req.session.user})
+    return
+  }
+  res.ok({})
+
+})
+
 
 
 app.get("/", function(req,res) {

@@ -32,6 +32,15 @@ function usersService($http) {
         return promise
     }
 
+    this.logout = function() {
+      return $http.post('http://localhost:3000/auth/logout')
+      .then(function(response) {
+        return true
+      },function(err) {
+        return false
+      })
+    }
+
     this.getAll = function() {
         var promise = $http.get('http://localhost:3000/list').
         then(function(response) {
