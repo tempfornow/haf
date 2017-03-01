@@ -1,7 +1,7 @@
-function navController($scope, $rootScope, usersService) {
+function navController($scope, $rootScope, identityService) {
   console.log("navbar here")
   $scope.logout = function() {
-      usersService.logout()
+      identityService.logout()
       .then(function(success) {
         $rootScope.user = ""
       })

@@ -1,10 +1,10 @@
-function loginController($uibModalInstance, $rootScope, $scope, usersService) {
+function loginController($uibModalInstance, $rootScope, $scope, identityService) {
 
 
 $scope.isValidLogin = true
 
   $scope.login = function(username, password) {
-    usersService.login(username, password)
+    identityService.login(username, password)
     .then(function(result) {
       if(result.err) {
         $scope.isValidLogin = false
@@ -18,7 +18,7 @@ $scope.isValidLogin = true
   }
 
   $scope.logout = function() {
-    usersService.logout
+    identityService.logout
     var promise = $http.post('http://localhost:3000/identity/logout')
     .then(function(response) {
       return true

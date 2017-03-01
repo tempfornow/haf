@@ -32,6 +32,7 @@
         };
     })
     .service('usersService', usersService)
+    .service('identityService', identityService)
     .controller('tableController', tableController)
     .controller('LoginModalCtrl', LoginModalCtrl)
     .controller('loginController', loginController)
