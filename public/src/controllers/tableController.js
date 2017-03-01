@@ -48,6 +48,8 @@ function tableController($scope, $rootScope, usersService) {
          $scope.updateChunk()
      }
 
+     $scope.$watch('itemsPerPage', $scope.updateChunk)
+     
      //Initialize table
      $scope.updateChunk()
 }

@@ -58,7 +58,7 @@ var Users = {
   }
 }
 
-for( i in _.range(5)) {
+for( i in _.range(19)) {
   var user = randomUser()
   Users[user.username] = user
 }

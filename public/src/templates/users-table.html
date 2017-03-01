@@ -44,4 +44,11 @@
     <div class = "text-center">
         <ul uib-pagination boundary-links = "true" previous-text = "&lsaquo;" next-text = "&rsaquo;" first-text = "&laquo;" last-text = "&raquo;" total-items = "totalItems" items-per-page = "itemsPerPage" ng-model = "currentPage" ng-change="pageChanged()" ng-show = "totalItems / itemsPerPage > 1"></ul>
     </div>
+    <div class = "text-center">
+      <div class = "btn-group text-center">
+        <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "5" btn-checkbox-true="1" btn-checkbox-false="0">5</label>
+        <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "10">10</label>
+        <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "15">15</label>
+      </div>
+    </div>
 </div>
