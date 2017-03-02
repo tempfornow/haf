@@ -36,7 +36,9 @@
                     <button  ng-click = "logout()" type = "button" class = "btn btn-primary navbar-btn">התנתק</button>
                 </ul>
                 <ul class = "nav navbar-nav navbar-left">
-                    <button type = "button" class = "btn btn-info navbar-btn">Hello {{user}}</button>
+                    <span ng-controller = "profileCardModalController as $ctrl">
+                      <button type = "button" ng-click = "$ctrl.open(user)" class = "btn btn-info navbar-btn">Hello {{user}}</button>
+                    </span>
                 </ul>
             </div>
     </div>

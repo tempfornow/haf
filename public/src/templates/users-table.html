@@ -31,7 +31,11 @@
         </thead>
         <tbody class = "text-center">
             <tr ng-repeat = "user in currChunk">
-              <td>{{user.username}}</td>
+              <td>
+                <span ng-controller = "profileCardModalController  as $ctrl">
+                  <a ng-click = "$ctrl.open(user.username)">{{user.username}}</a>
+                </span>
+              </td>
               <td>{{user.firstname}}</td>
               <td>{{user.surname}}</td>
               <td>{{user.age}}</td>
