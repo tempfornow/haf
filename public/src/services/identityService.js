@@ -1,4 +1,4 @@
-function identityService($http) {
+app.service('identityService', function($http) {
 
     this.login = function(username, password) {
         console.log(username, password)
@@ -25,5 +25,5 @@ function identityService($http) {
         return false
       })
     }
-    
-}
+
+})

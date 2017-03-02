@@ -1,4 +1,4 @@
-function tableController($scope, $rootScope, usersService) {
+app.controller('tableController',function($scope, $rootScope, usersService) {
 
      $scope.currentPage = 1
      $scope.itemsPerPage = 5
@@ -49,7 +49,7 @@ function tableController($scope, $rootScope, usersService) {
      }
 
      $scope.$watch('itemsPerPage', $scope.updateChunk)
-     
+
      //Initialize table
      $scope.updateChunk()
-}
+})

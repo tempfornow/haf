@@ -1,4 +1,4 @@
-function usersService($http) {
+app.service('usersService', function($http) {
     this.addUser = function(userData) {
       return $http.post('http://localhost:3000/', userData)
       .then(function(response) {
@@ -67,4 +67,4 @@ function usersService($http) {
 
         return promise
     }
-}
+})

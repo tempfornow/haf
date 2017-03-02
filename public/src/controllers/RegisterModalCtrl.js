@@ -1,4 +1,4 @@
-function RegisterModalCtrl($uibModal, $log, $document) {
+app.controller('RegisterModalCtrl', function($uibModal, $log, $document) {
     var $ctrl = this;
     $ctrl.items = ['item1', 'item2', 'item3'];
 
@@ -29,4 +29,4 @@ function RegisterModalCtrl($uibModal, $log, $document) {
           $log.info('Modal dismissed at: ' + new Date());
         });
     }
-}
+})
