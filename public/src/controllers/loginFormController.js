@@ -1,4 +1,4 @@
-app.controller('loginController', function($uibModalInstance, $rootScope, $scope, identityService) {
+app.controller('loginFormController', function($uibModalInstance, $rootScope, $scope, identityService) {
 
 
 $scope.isValidLogin = true

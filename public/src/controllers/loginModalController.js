@@ -1,4 +1,4 @@
-app.controller('LoginModalCtrl', function($uibModal, $log, $document) {
+app.controller('loginModalController', function($uibModal, $log, $document) {
     var $ctrl = this;
     $ctrl.items = ['item1', 'item2', 'item3'];
 
@@ -12,7 +12,7 @@ app.controller('LoginModalCtrl', function($uibModal, $log, $document) {
               ariaLabelledBy: 'modal-title',
               ariaDescribedBy: 'modal-body',
               templateUrl: './src/templates/login-modal.html',
-              controller: 'loginController',
+              controller: 'loginFormController',
               controllerAs: '$ctrl',
               size: size,
               appendTo: parentElem,

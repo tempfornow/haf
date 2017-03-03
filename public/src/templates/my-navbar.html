@@ -17,11 +17,11 @@
 <!--        Unauthenticated navbar body-->
         <div class="collapse navbar-collapse" id="myNavbar" ng-if = "!user">
             <ul class = "nav navbar-nav">
-                <span ng-controller = "LoginModalCtrl as $ctrl">
+                <span ng-controller = "loginModalController as $ctrl">
                     <button type = "button" class = "btn btn-primary navbar-btn"
                     ng-click = "$ctrl.open('sm')">התחבר</button>
                 </span>
-                <span ng-controller = "RegisterModalCtrl as $ctrl">
+                <span ng-controller = "registerModalController as $ctrl">
                     <button type="button" class = "btn btn-primary navbar-btn" ng-click = "$ctrl.open('sm')">הרשמה</button>
                 </span>
             </ul>

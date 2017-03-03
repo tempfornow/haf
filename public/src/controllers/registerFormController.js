@@ -1,4 +1,4 @@
-app.controller('registerController', function($uibModalInstance, items, usersService){
+app.controller('registerFormController', function($uibModalInstance, items, usersService){
 
     var $ctrl = this
 //        Range of valid ages for registration

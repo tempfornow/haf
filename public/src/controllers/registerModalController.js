@@ -1,4 +1,4 @@
-app.controller('RegisterModalCtrl', function($uibModal, $log, $document) {
+app.controller('registerModalController', function($uibModal, $log, $document) {
     var $ctrl = this;
     $ctrl.items = ['item1', 'item2', 'item3'];
 
@@ -12,7 +12,7 @@ app.controller('RegisterModalCtrl', function($uibModal, $log, $document) {
               ariaLabelledBy: 'modal-title',
               ariaDescribedBy: 'modal-body',
               templateUrl: './src/templates/register-modal.html',
-              controller: 'registerController',
+              controller: 'registerFormController',
               controllerAs: '$ctrl',
               size: size,
               appendTo: parentElem,
