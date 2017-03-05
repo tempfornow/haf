@@ -16,20 +16,4 @@ $scope.isValidLogin = true
       $scope.isValidLogin = false
     })
   }
-
-  $scope.logout = function() {
-    identityService.logout
-    var promise = $http.post('http://localhost:3000/identity/logout')
-    .then(function(response) {
-      return true
-    },function(err) {
-
-    })
-
-    promise.then(function(response) {
-      rootScope.user = ''
-    })
-    $rootScope.user = ""
-    $scope.isValidLogin = true
-  }
 })
