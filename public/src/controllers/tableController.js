@@ -1,4 +1,4 @@
-app.controller('tableController',function($scope, $rootScope, usersService) {
+app.controller('tableController',function($scope, $rootScope, $interval, usersService) {
 
      $scope.currentPage = 1
      $scope.itemsPerPage = 5
@@ -48,8 +48,43 @@ app.controller('tableController',function($scope, $rootScope, usersService) {
          $scope.updateChunk()
      }
 
-     $scope.$watch('itemsPerPage', $scope.updateChunk)
 
      //Initialize table
      $scope.updateChunk()
+
+     // Update table when number of items per page changes
+     $scope.$watch('itemsPerPage', $scope.updateChunk)
+
+     //Update interval in seconds
+     var period = 10 * 1000
+     var updatePeriodically
+
+     //Activate periodic update if needed
+     $scope.$watch('$root.updatePeriodically', function() {
+
+      //  $rootScope.updatePeriodically = true
+       if($rootScope.updatePeriodically) {
+         updatePeriodically = $interval(function(){
+           console.log('Updating')
+           $scope.updateChunk()
+         }, period)
+       } else {
+         console.log('cancel update')
+         $interval.cancel(updatePeriodically)
+       }
+     })
+
+    //  var updatePeriodically = $interval(function(){
+    //    console.log('Updating')
+    //    $scope.updateChunk()
+    //  }, period)
+    //  if($rootScope.updatePeriodically) {
+    //    updatePeriodically
+    //  }
+
+    // Remove periodic update of table when controller is destroyed
+     $scope.$on('$destroy', function() {
+       $interval.cancel(updatePeriodically)
+       console.log("destroyed")
+     })
 })

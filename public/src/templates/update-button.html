@@ -1,0 +1,10 @@
+
+<div class = "text-center">
+  <span ng-show = "!$ctrl.updatePeriodically">
+    <button ng-click = "$ctrl.onClick()" class = "btn btn-success btn-lg">Press to begin periodic update</button>
+  </span>
+
+  <span ng-show = "$ctrl.updatePeriodically">
+    <button ng-click = "$ctrl.onClick()" class = "btn btn-danger btn-lg">Press to stop periodic update</button>
+  </span>
+</div>
