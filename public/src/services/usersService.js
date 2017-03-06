@@ -15,31 +15,6 @@ app.service('usersService', function($http) {
     this.incSortNum = function(username) {
         store.transact(username,function(user) {user.sortNum++})
     }
-    this.login = function(username, password) {
-        console.log(username, password)
-        var promise = $http.post('http://localhost:3000/login', {username, password})
-        .then(function(response) {
-          console.log(response)
-          if(response.data.err) {
-            return {err: 'Invalid login details'}
-          }
-
-          return {}
-        }, function(err) {
-          return {err: 'Login is temporary unavailable'}
-        })
-
-        return promise
-    }
-
-    this.logout = function() {
-      return $http.post('http://localhost:3000/auth/logout')
-      .then(function(response) {
-        return true
-      },function(err) {
-        return false
-      })
-    }
 
     this.getAll = function() {
         var promise = $http.get('http://localhost:3000/list').
@@ -75,6 +50,22 @@ app.service('usersService', function($http) {
         return response.data
       }, function(err) {
         return {err: 'User retreival is currntly unavailable'}
+      })
+
+      return promise
+    }
+
+    this.removeUser = function(username) {
+      var promise = $http.delete('http://localhost:3000/' + username).
+      then(function(response) {
+        console.log(response)
+        if(response.data.err) {
+          return {err: 'Cannot remove user ' + username}
+        }
+
+        return true
+      }, function(err) {
+        return {err: 'User removal is currently unavailable'}
       })
 
       return promise
