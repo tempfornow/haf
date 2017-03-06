@@ -1,5 +1,8 @@
 <div ng-controller = "tableController">
     <div class = "alert alert-success text-center" ng-show = "!dataReady">Loading users table...</div>
+    <input type = "text" class = "form-control block text-left" placeholder = "Type username to search"
+      ng-model = "subStr" ng-change= "setSubStr()"/>
+    <br/>
     <table class = "table table-striped table-bordered table-sm" ng-show = "dataReady">
         <thead>
             <tr>

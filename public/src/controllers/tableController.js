@@ -11,13 +11,20 @@ app.controller('tableController',function($scope, $rootScope, $interval, usersSe
      $scope.order = 'asc'
      $scope.sortAttr = 'username'
 
+     //Input query string
+     $scope.subStr = ''
+
+     $scope.setSubStr = function() {
+       $scope.updateChunk()
+     }
 
      $scope.getQuery= function() {
        return {
          page: $scope.currentPage,
          itemsPerPage: $scope.itemsPerPage,
          attr: $scope.sortAttr,
-         order: $scope.order
+         order: $scope.order,
+         subStr: $scope.subStr,
        }
      }
 

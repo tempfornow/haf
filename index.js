@@ -104,16 +104,22 @@ app.get("/users/list", function(req, res) {
     attr: query.attr,
     order: query.order
   }
+  var subStr = query.subStr || ''
 
   console.log()
 
+  var filtered = _.filter(Users,
+    function(user) {
+      return user.username.includes(subStr)
+    })
+
   var chunk = _.chunk(
-    _.orderBy(Users,sort.attr,sort.order),
-    itemsPerPage
+      _.orderBy(filtered,sort.attr,sort.order),
+      itemsPerPage
   )[page - 1]
 
   // console.log(chunk)
-  res.ok({chunk,totalItems: _.keys(Users).length})
+  res.ok({chunk,totalItems: _.keys(filtered).length})
 
   // //TODO:Validate query structure
 })
