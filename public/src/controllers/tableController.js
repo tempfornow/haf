@@ -74,14 +74,6 @@ app.controller('tableController',function($scope, $rootScope, $interval, usersSe
        }
      })
 
-    //  var updatePeriodically = $interval(function(){
-    //    console.log('Updating')
-    //    $scope.updateChunk()
-    //  }, period)
-    //  if($rootScope.updatePeriodically) {
-    //    updatePeriodically
-    //  }
-
     // Remove periodic update of table when controller is destroyed
      $scope.$on('$destroy', function() {
        $interval.cancel(updatePeriodically)

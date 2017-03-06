@@ -67,4 +67,16 @@ app.service('usersService', function($http) {
 
         return promise
     }
+
+    this.getUser = function(username) {
+      var promise = $http.get('http://localhost:3000/'+ username).
+      then(function(response) {
+        console.log(response)
+        return response.data
+      }, function(err) {
+        return {err: 'User retreival is currntly unavailable'}
+      })
+
+      return promise
+    }
 })
