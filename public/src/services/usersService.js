@@ -1,6 +1,9 @@
 app.service('usersService', function($http) {
+    // Address of users api
+    var apiUrl = 'http://localhost:3000/users/'
+
     this.addUser = function(userData) {
-      return $http.post('http://localhost:3000/', userData)
+      return $http.post(apiUrl, userData)
       .then(function(response) {
         console.log(response)
         return response.data
@@ -16,23 +19,11 @@ app.service('usersService', function($http) {
         store.transact(username,function(user) {user.sortNum++})
     }
 
-    this.getAll = function() {
-        var promise = $http.get('http://localhost:3000/list').
-        then(function(response) {
-          console.log(response)
-          return response.data
-        }, function(err) {
-          return {err: "Users retreival is currently unavailable"}
-        })
-
-        return promise
-    }
-
     this.getChunk = function(query) {
         // convert query json to standart get request
         // query(for instance ?a=12&b=sdsd)
-        console.log('http://localhost:3000/list?'+ $.param(query))
-        var promise = $http.get('http://localhost:3000/list?'+ $.param(query)).
+        console.log(apiUrl + 'list?' + $.param(query))
+        var promise = $http.get(apiUrl + 'list?' + $.param(query)).
         then(function(response) {
           console.log(response)
           return response.data
@@ -44,7 +35,7 @@ app.service('usersService', function($http) {
     }
 
     this.getUser = function(username) {
-      var promise = $http.get('http://localhost:3000/'+ username).
+      var promise = $http.get(apiUrl+ username).
       then(function(response) {
         console.log(response)
         return response.data
@@ -56,7 +47,7 @@ app.service('usersService', function($http) {
     }
 
     this.removeUser = function(username) {
-      var promise = $http.delete('http://localhost:3000/' + username).
+      var promise = $http.delete(apiUrl + username).
       then(function(response) {
         console.log(response)
         if(response.data.err) {

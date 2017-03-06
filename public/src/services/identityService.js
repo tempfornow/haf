@@ -1,29 +1,32 @@
 app.service('identityService', function($http) {
 
-    this.login = function(username, password) {
-        console.log(username, password)
-        var promise = $http.post('http://localhost:3000/login', {username, password})
-        .then(function(response) {
-          console.log(response)
-          if(response.data.err) {
-            return {err: 'Invalid login details'}
-          }
+  // Address of authentication api
+  var apiUrl = 'http://localhost:3000/auth/'
 
-          return {}
-        }, function(err) {
-          return {err: 'Login is temporary unavailable'}
-        })
+  this.login = function(username, password) {
+    console.log(username, password)
+    var promise = $http.post(apiUrl + 'login', {username, password})
+    .then(function(response) {
+      console.log(response)
+      if(response.data.err) {
+        return {err: 'Invalid login details'}
+      }
 
-        return promise
-    }
+      return {}
+    }, function(err) {
+      return {err: 'Login is temporary unavailable'}
+    })
 
-    this.logout = function() {
-      return $http.post('http://localhost:3000/auth/logout')
-      .then(function(response) {
-        return true
-      },function(err) {
-        return false
-      })
-    }
+    return promise
+  }
+
+  this.logout = function() {
+    return $http.post(apiUrl + 'logOut')
+    .then(function(response) {
+      return true
+    },function(err) {
+      return false
+    })
+  }
 
 })

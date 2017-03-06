@@ -64,7 +64,7 @@ for( i in _.range(19)) {
 }
 console.log(Users)
 
-app.post("/login", function(req,res){
+app.post("/auth/login", function(req,res){
   var username = req.body.username
   var password = req.body.password
   if(Users[username] && Users[username].password === password) {
@@ -96,7 +96,7 @@ app.get("/", function(req,res) {
   res.redirect("/index.html")
 })
 
-app.get("/list", function(req, res) {
+app.get("/users/list", function(req, res) {
   var query = req.query
   var page = query.page
   var itemsPerPage = query.itemsPerPage
@@ -119,7 +119,7 @@ app.get("/list", function(req, res) {
 })
 
 
-app.get("/:username", function(req,res) {
+app.get("/users/:username", function(req,res) {
   var username = req.params.username
 
   if(!Users[username]) {
@@ -129,7 +129,7 @@ app.get("/:username", function(req,res) {
   }
 })
 
-app.post("/", function(req,res){
+app.post("/users", function(req,res){
   var user = req.body
   var username = user.username
   var password = user.password
@@ -147,7 +147,7 @@ app.post("/", function(req,res){
   }
 })
 
-app.put("/", function(req,res){
+app.put("/users", function(req,res){
   var user = req.body
   var username = user.username
   var password = user.password
@@ -166,7 +166,7 @@ app.put("/", function(req,res){
 
 })
 
-app.delete("/:username", function(req, res) {
+app.delete("/users/:username", function(req, res) {
   var username = req.params.username
 
   if(!Users[username]) {
