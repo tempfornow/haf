@@ -1,29 +1,42 @@
-function controller($scope, $rootScope, usersService) {
+function controller($scope, $rootScope, usersService, updateService) {
 
-  this.$onInit = function() {
+  this.updateProfile = function(){
 
-    $scope.dataReady = false
-    this.username = this.resolve.username
-    this.ownAccount = (this.username === $rootScope.user)
-
-    usersService.getUser(this.username).then(function(user) {
+    usersService.getUser($scope.username).then(function(user) {
       var firstname = user.firstname
       var surname = user.surname
       var age = user.age
 
       $scope.profile = {firstname,surname, age}
-      console.log($scope.profile)
       $scope.dataReady = true
     })
   }
 
+  this.$onInit = function() {
+
+    $scope.dataReady = false
+    $scope.username = this.resolve.username
+    this.ownAccount = ($scope.username === $rootScope.user)
+    this.updateProfile()
+
+    if($rootScope.updatePeriodically) {
+      $scope.updatePromise = updateService.addListener(this.updateProfile)
+    }
+  }
+
+  var stopUpdate = function() {
+    updateService.removeListener($scope.updatePromise)
+  }
+
   this.removeAccount = function() {
-    usersService.removeUser(this.username)
+    usersService.removeUser($scope.username)
     .then(function(result) {
-      console.log(result)
+      stopUpdate()
     })
     this.close()
   }
+
+  this.$onDestroy = stopUpdate
 }
 
 

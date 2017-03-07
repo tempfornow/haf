@@ -1,4 +1,5 @@
-app.controller('tableController',function($scope, $rootScope, $interval, usersService) {
+app.controller('tableController',function($scope, $rootScope, $interval,
+  usersService, updateService) {
 
      $scope.currentPage = 1
      $scope.itemsPerPage = 5
@@ -41,6 +42,7 @@ app.controller('tableController',function($scope, $rootScope, $interval, usersSe
        $scope.updateChunk()
      }
 
+     //Callback for column sort
      $scope.sortBy = function(attr) {
         //  usersService.incSortNum($rootScope.user)
          var currOrder = $scope.order
@@ -62,28 +64,20 @@ app.controller('tableController',function($scope, $rootScope, $interval, usersSe
      // Update table when number of items per page changes
      $scope.$watch('itemsPerPage', $scope.updateChunk)
 
-     //Update interval in seconds
-     var period = 10 * 1000
-     var updatePeriodically
-
      //Activate periodic update if needed
      $scope.$watch('$root.updatePeriodically', function() {
 
-      //  $rootScope.updatePeriodically = true
        if($rootScope.updatePeriodically) {
-         updatePeriodically = $interval(function(){
-           console.log('Updating')
-           $scope.updateChunk()
-         }, period)
+          $scope.updatePromise = updateService.addListener($scope.updateChunk)
        } else {
          console.log('cancel update')
-         $interval.cancel(updatePeriodically)
+         updateService.removeListener($scope.updatePromise)
        }
      })
 
     // Remove periodic update of table when controller is destroyed
      $scope.$on('$destroy', function() {
-       $interval.cancel(updatePeriodically)
-       console.log("destroyed")
+       updateService.removeListener($scope.updatePromise)
+       console.log('tableController destroyed')
      })
 })
