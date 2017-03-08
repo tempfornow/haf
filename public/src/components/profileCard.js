@@ -1,4 +1,4 @@
-function controller($scope, $rootScope, usersService, updateService) {
+var controller = function($scope, $rootScope, usersService, updateService) {
 
   this.updateProfile = function(){
 

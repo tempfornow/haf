@@ -19,7 +19,7 @@
             <ul class = "nav navbar-nav">
                 <span ng-controller = "loginModalController as $ctrl">
                     <button type = "button" class = "btn btn-primary navbar-btn"
-                    ng-click = "$ctrl.open('sm')">התחבר</button>
+                    ng-click = "$ctrl.open()">התחבר</button>
                 </span>
                 <span ng-controller = "registerModalController as $ctrl">
                     <button type="button" class = "btn btn-primary navbar-btn" ng-click = "$ctrl.open('sm')">הרשמה</button>
@@ -31,7 +31,7 @@
         </div>
 
 <!--        Authenticated navbar body-->
-            <div class="collapse navbar-collapse" id="myNavbar" ng-if = "user" ng-controller = "navController">
+            <div class="collapse navbar-collapse" id="myNavbar" ng-if = "user">
                 <ul class = "nav navbar-nav">
                     <button  ng-click = "logout()" type = "button" class = "btn btn-primary navbar-btn">התנתק</button>
                 </ul>

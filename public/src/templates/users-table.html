@@ -1,61 +1,59 @@
-<div ng-controller = "tableController">
-    <div class = "alert alert-success text-center" ng-show = "!dataReady">Loading users table...</div>
-    <input type = "text" class = "form-control block text-left" placeholder = "Type username to search"
-      ng-model = "subStr" ng-change= "setSubStr()"/>
-    <br/>
-    <table class = "table table-striped table-bordered table-sm" ng-show = "dataReady">
-        <thead>
-            <tr>
+<div class = "alert alert-success text-center" ng-show = "!dataReady">Loading users table...</div>
+<input type = "text" class = "form-control block text-left" placeholder = "Type username to search"
+  ng-model = "subStr" ng-change= "setSubStr()"/>
+<br/>
+<table class = "table table-striped table-bordered table-sm" ng-show = "dataReady">
+    <thead>
+        <tr>
 
-                <th class = "text-center" ng-click = "sortBy('username')">
-                    שם משתמש<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th>
-                <th class = "text-center" ng-click = "sortBy('firstname')">
-                    שם פרטי<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th>
-                <th class = "text-center" ng-click = "sortBy('surname')">
-                    שם משפחה<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th>
-                <th class = "text-center" ng-click = "sortBy('age')">
-                    גיל<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th>
-                <th class = "text-center" ng-click = "sortBy('pagesTurn')">
-                    החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th>
-                <th class = "text-center" ng-click = "sortBy('sortNum')">
-                    מספר מיונים<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th>
+            <th class = "text-center" ng-click = "sortBy('username')">
+                שם משתמש<span class = "glyphicon glyphicon-arrow-down"></span>
+            </th>
+            <th class = "text-center" ng-click = "sortBy('firstname')">
+                שם פרטי<span class = "glyphicon glyphicon-arrow-down"></span>
+            </th>
+            <th class = "text-center" ng-click = "sortBy('surname')">
+                שם משפחה<span class = "glyphicon glyphicon-arrow-down"></span>
+            </th>
+            <th class = "text-center" ng-click = "sortBy('age')">
+                גיל<span class = "glyphicon glyphicon-arrow-down"></span>
+            </th>
+            <th class = "text-center" ng-click = "sortBy('pagesTurn')">
+                החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
+            </th>
+            <th class = "text-center" ng-click = "sortBy('sortNum')">
+                מספר מיונים<span class = "glyphicon glyphicon-arrow-down"></span>
+            </th>
 <!--
-                <th class = "text-center" ng-click = "sortBy('age')">
-                    החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
-                </th>
+            <th class = "text-center" ng-click = "sortBy('age')">
+                החלפות עמוד<span class = "glyphicon glyphicon-arrow-down"></span>
+            </th>
 -->
-            </tr>
-        </thead>
-        <tbody class = "text-center">
-            <tr ng-repeat = "user in currChunk">
-              <td>
-                <span ng-controller = "profileCardModalController  as $ctrl">
-                  <a ng-click = "$ctrl.open(user.username)">{{user.username}}</a>
-                </span>
-              </td>
-              <td>{{user.firstname}}</td>
-              <td>{{user.surname}}</td>
-              <td>{{user.age}}</td>
-              <td>{{user.pagesTurn}}</td>
-              <td>{{user.sortNum}}</td>
-            </tr>
-        </tbody>
-    </table>
+        </tr>
+    </thead>
+    <tbody class = "text-center">
+        <tr ng-repeat = "user in currChunk">
+          <td>
+            <span ng-controller = "profileCardModalController  as $ctrl">
+              <a ng-click = "$ctrl.open(user.username)">{{user.username}}</a>
+            </span>
+          </td>
+          <td>{{user.firstname}}</td>
+          <td>{{user.surname}}</td>
+          <td>{{user.age}}</td>
+          <td>{{user.pagesTurn}}</td>
+          <td>{{user.sortNum}}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <div class = "text-center">
-        <ul uib-pagination boundary-links = "true" previous-text = "&lsaquo;" next-text = "&rsaquo;" first-text = "&laquo;" last-text = "&raquo;" total-items = "totalItems" items-per-page = "itemsPerPage" ng-model = "currentPage" ng-change="pageChanged()" ng-show = "totalItems / itemsPerPage > 1"></ul>
-    </div>
-    <div class = "text-center">
-      <div class = "btn-group text-center">
-        <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "5" btn-checkbox-true="1" btn-checkbox-false="0">5</label>
-        <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "10">10</label>
-        <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "15">15</label>
-      </div>
-    </div>
+<div class = "text-center">
+    <ul uib-pagination boundary-links = "true" previous-text = "&lsaquo;" next-text = "&rsaquo;" first-text = "&laquo;" last-text = "&raquo;" total-items = "totalItems" items-per-page = "itemsPerPage" ng-model = "currentPage" ng-change="pageChanged()" ng-show = "totalItems / itemsPerPage > 1"></ul>
+</div>
+<div class = "text-center">
+  <div class = "btn-group text-center">
+    <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "5" btn-checkbox-true="1" btn-checkbox-false="0">5</label>
+    <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "10">10</label>
+    <label class = "btn btn-primary" ng-model = "itemsPerPage" uib-btn-radio = "15">15</label>
+  </div>
 </div>

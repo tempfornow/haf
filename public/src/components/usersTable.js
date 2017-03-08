@@ -1,4 +1,4 @@
-app.controller('tableController',function($scope, $rootScope, $interval,
+var controller = function($scope, $rootScope, $interval,
   usersService, updateService) {
 
      $scope.currentPage = 1
@@ -80,4 +80,14 @@ app.controller('tableController',function($scope, $rootScope, $interval,
        updateService.removeListener($scope.updatePromise)
        console.log('tableController destroyed')
      })
-})
+}
+
+app.component('usersTable', {
+  templateUrl: './src/templates/users-table.html',
+  bindings: {
+    resolve: '<',
+    close: '&',
+    dismiss: '&'
+  },
+  controller
+});
