@@ -12,7 +12,6 @@ app.service('updateService', function($http, $interval) {
   }
 
   this.removeListener = function(updatePromise) {
-    console.log(updatePromise)
-    console.log($interval.cancel(updatePromise))
+    $interval.cancel(updatePromise)
   }
 })

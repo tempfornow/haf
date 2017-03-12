@@ -1,7 +1,7 @@
 app.service('identityService', function($http) {
 
   // Address of authentication api
-  var apiUrl = 'http://localhost:3000/auth/'
+  var apiUrl = '/auth/'
 
   this.login = function(username, password) {
     console.log(username, password)

@@ -1,10 +1,7 @@
 var controller = function($rootScope, $scope, identityService) {
 
-
-  $scope.isValidLogin = true
-
   this.$onInit = function() {
-    console.log("username: "+this.resolve.username)
+    $scope.isValidLogin = true
   }
 
   this.login = function(username, password) {

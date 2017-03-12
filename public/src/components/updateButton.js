@@ -1,4 +1,4 @@
-function ctrl($rootScope) {
+var controller = function($rootScope) {
 
   this.updatePeriodically = $rootScope.updatePeriodically
 
@@ -12,5 +12,5 @@ function ctrl($rootScope) {
 
 app.component('updateButton', {
   templateUrl: './src/templates/update-button.html',
-  controller: ctrl
+  controller
 });

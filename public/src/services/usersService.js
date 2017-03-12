@@ -1,6 +1,6 @@
 app.service('usersService', function($http) {
     // Address of users api
-    var apiUrl = 'http://localhost:3000/users/'
+    var apiUrl = '/users/'
 
     this.addUser = function(userData) {
       return $http.post(apiUrl, userData)

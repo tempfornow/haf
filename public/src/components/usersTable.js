@@ -1,19 +1,21 @@
 var controller = function($scope, $rootScope, $interval,
   usersService, updateService) {
 
-     $scope.currentPage = 1
-     $scope.itemsPerPage = 5
+    this.$onInit = function() {
+      $scope.currentPage = 1
+      $scope.itemsPerPage = 5
 
-     $scope.dataReady = false
-     $scope.totalItems = 0
-     $scope.currChunk = []
-     $scope.dataReady = false
+      $scope.dataReady = false
+      $scope.totalItems = 0
+      $scope.currChunk = []
+      $scope.dataReady = false
 
-     $scope.order = 'asc'
-     $scope.sortAttr = 'username'
+      $scope.order = 'asc'
+      $scope.sortAttr = 'username'
 
-     //Input query string
-     $scope.subStr = ''
+      //Input query string
+      $scope.subStr = ''
+    }
 
      $scope.setSubStr = function() {
        $scope.updateChunk()
