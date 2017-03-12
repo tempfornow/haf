@@ -1,5 +1,5 @@
 
-<div class = "text-center">
+<div class = "text-center" ng-show = "$root.user">
   <span ng-show = "!$ctrl.updatePeriodically">
     <button ng-click = "$ctrl.onClick()" class = "btn btn-success btn-lg">Press to begin periodic update</button>
   </span>
