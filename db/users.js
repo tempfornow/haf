@@ -1,48 +1,36 @@
+'use strict';
 // Connection URL
-var MongoClient = require('mongodb').MongoClient
+let MongoClient = require('mongodb').MongoClient
   , assert = require('assert')
-var _ = require('lodash')
+let _ = require('lodash')
 
-var randomUser = require('../public/deb').randomUser
+let validUser = require('../userSchema').validUser
+let randomUser = require('../public/deb').randomUser
 
-var url = 'mongodb://localhost:27017/Hafifa'
+// var url = 'mongodb://localhost:27017/Hafifa
+let db = require('./db')
 
+//Returns users collection
 function getUsersCol() {
-  return MongoClient.connect(url)
+  return db.getInstance()
     .then(function(db){
       return db.collection('users')
     })
 }
 
-var Users = {
-  new: {
-    username: "new",
-    password: "alkalkalk",
-    firstname: "la",
-    surname: "sd",
-    age: 20,
-    pagesTurn: 0,
-    sortNum: 0
-  }
-}
-
-for( i in _.range(19)) {
-  var user = randomUser()
-  Users[user.username] = user
-}
-// console.log(Users)
-module.exports = Users
-
-//Adds user.if the username already exists
-//Throws error
 function addUser(user) {
   return getUsersCol()
-  .then(function(col) {
-    var username = user.username
-    return col.findOne({username})
-      .then(function(doc) {
+  .then(col => {
+      var username = user.username
+      return col.findOne({username})
+      .catch(err => {
+        throw new Error('Adding users is currently unavailable')
+      })
+      .then(doc => {
+        //Throw an error if user doesn't exist. Otherwise,
+        //Return user
         if(doc) {
-          throw {err: 'Username ' + user.username + ' already exists'}
+          throw new Error('Username ' + user.username + ' already exists')
         } else {
           return col.insertOne(user)
         }
@@ -50,14 +38,23 @@ function addUser(user) {
   })
 }
 
-function removeUser(username) {
-  return getUsersCol()
-  .then(function(col) {
-    return col.deleteOne({username})
+function flushDb() {
+  return getUsersCol().
+  then(col => {
+    return col.deleteMany({})
   })
-  .then(function(result) {
+}
+
+function removeUser(username) {
+  //Get users collection
+  return getUsersCol()
+  .then(col => col.deleteOne({username}))
+  .catch(err => new Error('Service is currently unavailable'))
+  .then(result => {
+    //If user doesn't exist throw an error
+    //Otherwise, return empty object to mark success
     if(!result.deletedCount) {
-      throw {message: 'Username ' + username + ' does not exists'}
+      throw new Error('Username ' + username + ' does not exists')
     } else {
       return {}
     }
@@ -66,13 +63,13 @@ function removeUser(username) {
 
 function getUser(username) {
   return getUsersCol()
-  .then(function(col) {
-    return col.findOne({username})
-  })
-  .then(function(doc) {
+  .then(col => col.findOne({username}))
+  .catch(err => new Error('Service user is currently unavailable'))
+  .then(doc => {
     if(!doc) {
-      throw {message: 'Username ' + username + ' does not exists'}
+      throw new Error('Username ' + username + ' does not exists')
     } else {
+      delete doc['_id']
       return doc
     }
   })
@@ -81,10 +78,9 @@ function getUser(username) {
 function updateUser(user) {
   var username = user.username
   return getUsersCol()
-  .then(function(col) {
-    console.log({username})
-    console.log(user)
-    return col.updateOne({username},user)
+  .then(col => col.updateOne({username},{$set: user}))
+  .catch(function(err) {
+    throw new Error("Service is temporary unavailable")
   })
   .then(function(result) {
     //If no document was altered return error
@@ -93,32 +89,17 @@ function updateUser(user) {
     }
 
     if(!result.modifiedCount) {
-      throw new Error('User update is currently unavailable')
+      throw new Error("Service is temporary unavailable")
     }
 
     return user
   })
 }
 
-function getMatches(regex) {
-  return getUsersCol()
-  .then(function(col){
-    return col.find({username: regex}).toArray()
-  })
-  .then(function(user){
-    return user
-  })
-}
-
-function getAll() {
-  getUsersCol()
-  .then(function(col) {
-    return col.find().toArray()
-  })
-  .then(function(users) {
-    console.log(users)
-  })
-  .catch(function(err) {
-    console.log("error occured")
-  })
+module.exports = {
+  flushDb,
+  addUser,
+  removeUser,
+  getUser,
+  updateUser
 }

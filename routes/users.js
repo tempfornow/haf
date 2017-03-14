@@ -5,7 +5,6 @@ var _ = require("lodash")
 var validUser = require('../userSchema').validUser
 var Users  = require('../db/users')
 
-
 router.get("/list", (req, res) => {
   var query = req.query
   var page = query.page
@@ -15,8 +14,6 @@ router.get("/list", (req, res) => {
     order: query.order
   }
   var subStr = query.subStr || ''
-
-  console.log()
 
   var filtered = _.filter(Users,
     function(user) {
@@ -48,6 +45,7 @@ router.post("/", (req,res) => {
   var user = req.body
   var username = user.username
   var password = user.password
+
 
   if(Users[username]) {
     res.err("User already exists")
