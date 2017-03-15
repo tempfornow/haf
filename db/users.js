@@ -96,10 +96,41 @@ function updateUser(user) {
   })
 }
 
+function getChunk(query) {
+  let page = query.page
+  let itemsPerPage = query.itemsPerPage
+  let sort = {
+    attr: query.attr,
+    order: query.order
+  }
+  let subStr = query.subStr || ''
+
+  return getUsersCol()
+  .then(col => col.find({username: RegExp(subStr)}).toArray())
+  .then(filtered => {
+    let chunk = _.chunk(
+        _.orderBy(filtered,sort.attr,sort.order),
+        itemsPerPage
+    )[page - 1]
+
+    return {chunk, totalItems: filtered.length}
+  })
+}
+
+// getChunk({page: 3, itemsPerPage: 5, attr:'username', order:'asc', subStr: ''})
+// .then(result => {
+//   console.log(result)
+// })
+// .catch(err => {
+//   console.log(err)
+// })
+
 module.exports = {
   flushDb,
   addUser,
   removeUser,
   getUser,
-  updateUser
+  updateUser,
+  getUsersCol,
+  getChunk
 }

@@ -6,89 +6,72 @@ var validUser = require('../userSchema').validUser
 var Users  = require('../db/users')
 
 router.get("/list", (req, res) => {
-  var query = req.query
-  var page = query.page
-  var itemsPerPage = query.itemsPerPage
-  var sort = {
-    attr: query.attr,
-    order: query.order
-  }
-  var subStr = query.subStr || ''
-
-  var filtered = _.filter(Users,
-    function(user) {
-      return user.username.includes(subStr)
-    })
-
-  var chunk = _.chunk(
-      _.orderBy(filtered,sort.attr,sort.order),
-      itemsPerPage
-  )[page - 1]
-
-  // console.log(chunk)
-  res.ok({chunk,totalItems: _.keys(filtered).length})
-
-  // //TODO:Validate query structure
+  Users.getChunk(req.query)
+  .then(result => {
+    res.ok(result)
+  })
+  .catch(err => {
+    res.err("Service is currently unavailable")
+  })
 })
 
 router.get("/:username", (req,res) => {
-  var username = req.params.username
 
-  if(!Users[username]) {
+  var username = req.params.username
+  Users.getUser(username)
+  .then(user => {
+    res.ok(user)
+  })
+  .catch(err => {
     res.err("User "+username+" doesn't exist")
-  } else {
-    res.ok(Users[username])
-  }
+  })
 })
 
 router.post("/", (req,res) => {
   var user = req.body
-  var username = user.username
-  var password = user.password
 
-
-  if(Users[username]) {
-    res.err("User already exists")
+  if(!validUser(user)) {
+    res.err("Invalid user format")
     return
   }
 
-  if(validUser(user)) {
-    Users[username] = user
-    res.ok(Users)
-  } else {
-    res.err("Invalid user format")
-  }
+  Users.addUser(user)
+  .then(result => {
+    res.ok([])
+  })
+  .catch(err => {
+    res.err('User already exists')
+  })
+
 })
 
 router.put("/", (req,res) => {
   var user = req.body
-  var username = user.username
-  var password = user.password
 
-  if(!Users[username]) {
-    res.err("User doesn't exist")
+  if(!validUser(user)) {
+    res.err("Invalid user format")
     return
   }
 
-  if(validUser(user)) {
-    Users[username] = user
-    res.ok(Users)
-  } else {
-    res.err("Invalid user format")
-  }
-
+  Users.updateUser(user)
+  .then(result => {
+    res.ok([])
+  })
+  .catch(err => {
+    res.err("User doesn't exist")
+  })
 })
 
 router.delete("/:username", (req, res) => {
   var username = req.params.username
 
-  if(!Users[username]) {
+  Users.removeUser(username)
+  .then(result => {
+    res.ok([])
+  })
+  .catch(err => {
     res.err("User " + username + " doesn't exist")
-    return
-  } else {
-    delete Users[username]
-    res.ok(Users)
-  }
+  })
 })
 
 module.exports = router

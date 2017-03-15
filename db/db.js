@@ -2,7 +2,7 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert')
 
-var url = 'mongodb://localhost:27017/Hafifa'
+var url = 'mongodb://localhost:27017/hafifa'
 
 let dbInstance = null
 
