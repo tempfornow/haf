@@ -18,19 +18,51 @@ function getUsersCol() {
     })
 }
 
+let errorCode = {
+  USER_DOES_NOT_EXIST: {
+    code: 0,
+    description: "Requested user doesn't exist"
+  },
+  SERVICE_UNAVAILABLE: {
+    code: 1,
+    description: "Service is currently unavailable - please try again letter"
+  },
+  USER_ALREADY_EXIST: {
+    code: 2,
+    description: "Requested user already exists"
+  },
+  INVALID_USER_FORMAT: {
+    code: 3,
+    description: "Invalid user format"
+  }
+}
+
+// Checks if login details are valid
+function verifyLogin(login) {
+  return getUsersCol().
+  then(col => col.count({username: login.username,
+    password: login.password}))
+  .catch(err => {
+    throw errorCode.SERVICE_UNAVAILABLE
+  })
+  .then(count => {
+    return count > 0
+  })
+}
+
 function addUser(user) {
   return getUsersCol()
   .then(col => {
       var username = user.username
       return col.findOne({username})
       .catch(err => {
-        throw new Error('Adding users is currently unavailable')
+        throw errorCode.SERVICE_UNAVAILABLE
       })
       .then(doc => {
         //Throw an error if user doesn't exist. Otherwise,
         //Return user
         if(doc) {
-          throw new Error('Username ' + user.username + ' already exists')
+          throw errorCode.USER_ALREADY_EXIST
         } else {
           return col.insertOne(user)
         }
@@ -49,12 +81,14 @@ function removeUser(username) {
   //Get users collection
   return getUsersCol()
   .then(col => col.deleteOne({username}))
-  .catch(err => new Error('Service is currently unavailable'))
+  .catch(err => {
+    throw errorCode.SERVICE_UNAVAILABLE
+  })
   .then(result => {
     //If user doesn't exist throw an error
     //Otherwise, return empty object to mark success
     if(!result.deletedCount) {
-      throw new Error('Username ' + username + ' does not exists')
+      throw errorCode.USER_DOES_NOT_EXIST
     } else {
       return {}
     }
@@ -64,10 +98,12 @@ function removeUser(username) {
 function getUser(username) {
   return getUsersCol()
   .then(col => col.findOne({username}))
-  .catch(err => new Error('Service user is currently unavailable'))
+  .catch(err => {
+    throw errorCode.SERVICE_UNAVAILABLE
+  })
   .then(doc => {
     if(!doc) {
-      throw new Error('Username ' + username + ' does not exists')
+      throw errorCode.USER_DOES_NOT_EXIST
     } else {
       delete doc['_id']
       return doc
@@ -79,17 +115,17 @@ function updateUser(user) {
   var username = user.username
   return getUsersCol()
   .then(col => col.updateOne({username},{$set: user}))
-  .catch(function(err) {
-    throw new Error("Service is temporary unavailable")
+  .catch(err => {
+    throw errorCode.SERVICE_UNAVAILABLE
   })
   .then(function(result) {
     //If no document was altered return error
     if(!result.matchedCount) {
-      throw new Error('Username ' + username + ' does not exists')
+      throw errorCode.USER_DOES_NOT_EXIST
     }
 
     if(!result.modifiedCount) {
-      throw new Error("Service is temporary unavailable")
+      throw errorCode.SERVICE_UNAVAILABLE
     }
 
     return user
@@ -107,6 +143,9 @@ function getChunk(query) {
 
   return getUsersCol()
   .then(col => col.find({username: RegExp(subStr)}).toArray())
+  .catch(err => {
+    throw errorCode.SERVICE_UNAVAILABLE
+  })
   .then(filtered => {
     let chunk = _.chunk(
         _.orderBy(filtered,sort.attr,sort.order),
@@ -132,5 +171,7 @@ module.exports = {
   getUser,
   updateUser,
   getUsersCol,
-  getChunk
+  getChunk,
+  errorCode,
+  verifyLogin
 }

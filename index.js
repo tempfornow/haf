@@ -5,8 +5,17 @@ var bodyParser = require('body-parser')
 var users = require('./routes/users')
 var auth = require('./routes/auth')
 var app = express()
+var getInstance = require('./db/db').getInstance
+var close = require('./db/db').close
 
-
+getInstance()
+.then(col => {
+  console.log("DB is working")
+  close()
+})
+.catch(err => {
+  console.log(err)
+})
 
 // Add body-parser
 app.use(bodyParser.json())       // to support JSON-encoded bodies

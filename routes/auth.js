@@ -6,10 +6,9 @@ var Users  = require('../db/users')
 router.post("/login", (req,res) => {
   var username = req.body.username
   var password = req.body.password
-  Users.getUser(username)
-  .then(user => {
-    console.log(user)
-    if(user.password === password) {
+  Users.verifyLogin({username,password})
+  .then(isValidLogin => {
+    if(isValidLogin) {
       req.session.user = username
       res.ok('Logged in')
     } else {
@@ -17,7 +16,7 @@ router.post("/login", (req,res) => {
     }
   })
   .catch(err => {
-    res.err('Login failed')
+    res.err(err)
   })
   // if(Users[username] && Users[username].password === password) {
   //   req.session.user = username
