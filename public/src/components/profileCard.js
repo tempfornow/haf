@@ -1,4 +1,4 @@
-var controller = function($scope, $rootScope, usersService, updateService) {
+var controller = function($scope, $rootScope, usersService,identityService, updateService) {
 
   this.updateProfile = function(){
 
@@ -31,7 +31,17 @@ var controller = function($scope, $rootScope, usersService, updateService) {
   this.removeAccount = function() {
     usersService.removeUser($scope.username)
     .then(function(result) {
+      console.log("Finished removal")
       stopUpdate()
+      return true
+    })
+    .then(function(result) {
+      console.log("Removed user")
+      if($rootScope.user === $scope.username) {
+        $rootScope.user = ''
+        identityService.logout()
+      }
+
     })
     this.close()
   }

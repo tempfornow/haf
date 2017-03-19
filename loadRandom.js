@@ -33,7 +33,7 @@ function randomUser() {
     let firstname = _.shuffle(['avi','benny','bar','candy','danny'])[0]
     let surname = _.shuffle(['cohen','levy','miki','abby','baron','candy','dvir'])[0]
     let age = _.shuffle(_.range(18,120))[0]
-    let password = "garbage123"
+    let password = "alkalkalk"
     let pagesTurn = 0
     let sortNum = 0
     while(username.length == 0) {

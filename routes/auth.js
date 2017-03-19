@@ -18,12 +18,6 @@ router.post("/login", (req,res) => {
   .catch(err => {
     res.err(err)
   })
-  // if(Users[username] && Users[username].password === password) {
-  //   req.session.user = username
-  //   res.ok("Logged in")
-  // } else {
-  //   res.err("Login failed")
-  // }
 })
 
 router.post("/logout", (req,res) => {
