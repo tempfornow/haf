@@ -17,3 +17,4 @@ deb.js
 /node_modules
 /public/src/dist
 /play_garbage
+/dist

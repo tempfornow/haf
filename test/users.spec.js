@@ -1,170 +1,147 @@
-'use strict';
-let chai = require("chai")
-let chaiAsPromised = require("chai-as-promised")
-let users = require('../db/users')
-let addUser = users.addUser
-let removeUser = users.removeUser
-let getUser = users.getUser
-let updateUser = users.updateUser
-let getChunk = users.getChunk
-let flushDb = users.flushDb
-let db = require('../db/db')
-chai.use(chaiAsPromised)
-chai.should()
-
-
-beforeEach ( () => {
-  return flushDb()
-})
-
-after( () => {
-  db.close()
-})
-
-describe('Add users', () => {
-
-    it('Adding user to empty db should be fulfilled', () =>
-      addUser({username: 'avi'})
-      .should.be.fulfilled
-    )
-
-    it('Adding two users with different usernames to empty db should be fulfilled', () =>
-      addUser({username: 'avi'})
-      .then(result => addUser({username: 'benny'}))
-      .should.be.fulfilled)
-
-    it('Adding two users with same usernames to empty db should be rejected', () =>
-      addUser({username: 'avi'})
-      .should.be.fulfilled
-      .then(result => addUser({username: 'avi'}))
-      .should.be.rejected)
-})
-
-describe('Remove users', () => {
-  it('Remove unexisting user from empty db should be rejected', () =>
-    removeUser({username: 'avi'}).should.be.rejected)
-
-  it('Remove unexisting user from non-empty db should be rejected', () =>
-    addUser({username: 'avi'}).should.be.fulfilled
-    .then(result => removeUser('benny'))
-    .should.be.rejected)
-
-  it('Remove existing user should be fulfilled', () =>
-    addUser({username: 'avi'}).should.be.fulfilled
-    .then(result => removeUser('avi'))
-    .should.be.fulfilled)
-
-  it('Remove one of two users should be fulfilled', () =>
-    addUser({username: 'avi'}).should.be.fulfilled
-    .then( () =>  addUser({username: 'benny'}))
-    .should.be.fulfilled
-    .then( () => removeUser('avi'))
-    .should.be.fulfilled)
-
-  it('Add,remove and add same user should be fulfilled', () =>
-    addUser({username: 'avi'})
-    .then( () => removeUser('avi'))
-    .then( () => addUser({username: 'avi'}))
-    .should.be.fulfilled)
-})
-
-describe('Get users', () => {
-  it('Get user from empty db should be rejected', () =>
-    getUser({username:'avi'}).should.be.rejected
-  )
-
-  it('Add user, then get another user should be rejected', () =>
-    addUser({username: 'avi'})
-    .then( () => getUser('benny')).should.be.rejected
-  )
-
-  it('Add and get same user - should return the user', () =>
-    addUser({username: 'avi', age: 19})
-    .then( () => getUser('avi'))
-    .should.eventually.deep.equal({username: 'avi', age:19})
-  )
-
-  it('Add and get two users', () =>
-    addUser({username: 'avi'})
-    .then( () => addUser({username: 'benny'}))
-    .then( () => getUser('avi'))
-    .should.eventually.deep.equal({username: 'avi'})
-    .then( () => getUser('benny'))
-    .should.eventually.deep.equal({username: 'benny'})
-  )
-
-  it('Add, remove and then get', () =>
-    addUser({username: 'avi'})
-    .then( () => removeUser('avi'))
-    .then( () => getUser('avi'))
-    .should.be.rejected
-  )
-
-  it('Add two users, remove one of them and then get the removed', () =>
-    addUser({username: 'avi'})
-    .then( () => addUser({username: 'benny'}))
-    .then( () => removeUser('avi'))
-    .then( () => getUser('avi'))
-    .should.be.rejected
-  )
-
-  it('Add two users, remove one of them and then get the removed', () =>
-    addUser({username: 'avi'})
-    .then( () => addUser({username: 'benny'}))
-    .then( () => removeUser('avi'))
-    .then( () => getUser('benny'))
-    .should.eventually.deep.equal({username: 'benny'})
-  )
-
-  it('Add, remove and add user - then get him', () =>
-    addUser({username: 'avi'})
-    .then( () => removeUser('avi'))
-    .then( () => addUser({username: 'avi'}))
-    .then( () => getUser('avi'))
-    .should.eventually.deep.equal({username: 'avi'})
-  )
-
-})
-
-describe('Update user', () => {
-  it('update nonexisting user', () =>
-    updateUser({username: 'avi'})
-    .should.be.rejected
-  )
-
-  it('update existing user - one field', () =>
-    addUser({username: 'avi', age: 15})
-    .then( () => updateUser({username: 'avi', age: 89}))
-    .then( () => getUser('avi'))
-    .should.eventually.deep.equal({username: 'avi', age: 89})
-  )
-
-  it('update existing user - two fields', () =>
-    addUser({username: 'avi', age: 15, surname: 'cohen'})
-    .then( () => updateUser({username: 'avi', age: 89, surname: 'levy'}))
-    .then( () => getUser('avi'))
-    .should.eventually.deep.equal({username: 'avi', age: 89, surname: 'levy'})
-  )
-
-  it('update existing user - one of two fields', () =>
-    addUser({username: 'avi', age: 19, surname: 'cohen'})
-    .then( () => updateUser({username: 'avi', age: 89}))
-    .then( () => getUser('avi'))
-    .should.eventually.deep.equal({username: 'avi', age: 89, surname: 'cohen'})
-  )
-
-  it('update one of two users', () =>
-    addUser({username: 'avi', age: 19, surname: 'cohen'})
-    .then( () => addUser({username: 'benny', age: 26, surname: 'levy'}))
-    .then( () => updateUser({username: 'avi', age: 89}))
-    .then( () => getUser('avi'))
-    .should.eventually.deep.equal({username: 'avi', age: 89, surname: 'cohen'})
-  )
-
-  it('update removed user', () =>
-    addUser({username: 'avi', age: 19, surname: 'cohen'})
-    .then( () => removeUser('avi'))
-    .then( () => updateUser({username: 'avi', age: 89}))
-    .should.be.rejected
-  )
-})
+"use strict";
+exports.__esModule = true;
+var chai = require("chai");
+var chaiAsPromised = require("chai-as-promised");
+var users_1 = require("../db/users");
+var db = require("../db/db");
+chai.use(chaiAsPromised);
+chai.should();
+//Flush db before tests begin
+beforeEach(function () {
+    return users_1.flushDb();
+});
+//Close connection to db after tests end
+after(function () {
+    db.close();
+});
+describe('Add users', function () {
+    it('Adding user to empty db should be fulfilled', function () {
+        return users_1.addUser({ username: 'avi' })
+            .should.be.fulfilled;
+    });
+    it('Adding two users with different usernames to empty db should be fulfilled', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function (result) { return users_1.addUser({ username: 'benny' }); })
+            .should.be.fulfilled;
+    });
+    it('Adding two users with same usernames to empty db should be rejected', function () {
+        return users_1.addUser({ username: 'avi' })
+            .should.be.fulfilled
+            .then(function (result) { return users_1.addUser({ username: 'avi' }); })
+            .should.be.rejected;
+    });
+});
+describe('Remove users', function () {
+    it('Remove unexisting user from empty db should be rejected', function () {
+        return users_1.removeUser({ username: 'avi' }).should.be.rejected;
+    });
+    it('Remove unexisting user from non-empty db should be rejected', function () {
+        return users_1.addUser({ username: 'avi' }).should.be.fulfilled
+            .then(function (result) { return users_1.removeUser('benny'); })
+            .should.be.rejected;
+    });
+    it('Remove existing user should be fulfilled', function () {
+        return users_1.addUser({ username: 'avi' }).should.be.fulfilled
+            .then(function (result) { return users_1.removeUser('avi'); })
+            .should.be.fulfilled;
+    });
+    it('Remove one of two users should be fulfilled', function () {
+        return users_1.addUser({ username: 'avi' }).should.be.fulfilled
+            .then(function () { return users_1.addUser({ username: 'benny' }); })
+            .should.be.fulfilled
+            .then(function () { return users_1.removeUser('avi'); })
+            .should.be.fulfilled;
+    });
+    it('Add,remove and add same user should be fulfilled', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function () { return users_1.removeUser('avi'); })
+            .then(function () { return users_1.addUser({ username: 'avi' }); })
+            .should.be.fulfilled;
+    });
+});
+describe('Get users', function () {
+    it('Get user from empty db should be rejected', function () {
+        return users_1.getUser({ username: 'avi' }).should.be.rejected;
+    });
+    it('Add user, then get another user should be rejected', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function () { return users_1.getUser('benny'); }).should.be.rejected;
+    });
+    it('Add and get same user - should return the user', function () {
+        return users_1.addUser({ username: 'avi', age: 19 })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.eventually.deep.equal({ username: 'avi', age: 19 });
+    });
+    it('Add and get two users', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function () { return users_1.addUser({ username: 'benny' }); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.eventually.deep.equal({ username: 'avi' })
+            .then(function () { return users_1.getUser('benny'); })
+            .should.eventually.deep.equal({ username: 'benny' });
+    });
+    it('Add, remove and then get', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function () { return users_1.removeUser('avi'); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.be.rejected;
+    });
+    it('Add two users, remove one of them and then get the removed', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function () { return users_1.addUser({ username: 'benny' }); })
+            .then(function () { return users_1.removeUser('avi'); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.be.rejected;
+    });
+    it('Add two users, remove one of them and then get the removed', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function () { return users_1.addUser({ username: 'benny' }); })
+            .then(function () { return users_1.removeUser('avi'); })
+            .then(function () { return users_1.getUser('benny'); })
+            .should.eventually.deep.equal({ username: 'benny' });
+    });
+    it('Add, remove and add user - then get him', function () {
+        return users_1.addUser({ username: 'avi' })
+            .then(function () { return users_1.removeUser('avi'); })
+            .then(function () { return users_1.addUser({ username: 'avi' }); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.eventually.deep.equal({ username: 'avi' });
+    });
+});
+describe('Update user', function () {
+    it('update nonexisting user', function () {
+        return users_1.updateUser({ username: 'avi' })
+            .should.be.rejected;
+    });
+    it('update existing user - one field', function () {
+        return users_1.addUser({ username: 'avi', age: 15 })
+            .then(function () { return users_1.updateUser({ username: 'avi', age: 89 }); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.eventually.deep.equal({ username: 'avi', age: 89 });
+    });
+    it('update existing user - two fields', function () {
+        return users_1.addUser({ username: 'avi', age: 15, surname: 'cohen' })
+            .then(function () { return users_1.updateUser({ username: 'avi', age: 89, surname: 'levy' }); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.eventually.deep.equal({ username: 'avi', age: 89, surname: 'levy' });
+    });
+    it('update existing user - one of two fields', function () {
+        return users_1.addUser({ username: 'avi', age: 19, surname: 'cohen' })
+            .then(function () { return users_1.updateUser({ username: 'avi', age: 89 }); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.eventually.deep.equal({ username: 'avi', age: 89, surname: 'cohen' });
+    });
+    it('update one of two users', function () {
+        return users_1.addUser({ username: 'avi', age: 19, surname: 'cohen' })
+            .then(function () { return users_1.addUser({ username: 'benny', age: 26, surname: 'levy' }); })
+            .then(function () { return users_1.updateUser({ username: 'avi', age: 89 }); })
+            .then(function () { return users_1.getUser('avi'); })
+            .should.eventually.deep.equal({ username: 'avi', age: 89, surname: 'cohen' });
+    });
+    it('update removed user', function () {
+        return users_1.addUser({ username: 'avi', age: 19, surname: 'cohen' })
+            .then(function () { return users_1.removeUser('avi'); })
+            .then(function () { return users_1.updateUser({ username: 'avi', age: 89 }); })
+            .should.be.rejected;
+    });
+});
