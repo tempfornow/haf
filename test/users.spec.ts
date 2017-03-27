@@ -1,10 +1,11 @@
 import * as chai from "chai"
 import * as chaiAsPromised from "chai-as-promised"
-import {addUser,removeUser, getUser, updateUser, getChunk, flushDb} from  '../db/users'
-import * as db from '../db/db'
+import { usersCol } from '../db/users';
+import {db} from '../db/db'
 chai.use(chaiAsPromised)
 chai.should()
 
+let {addUser, removeUser, getUser, updateUser, flushDb} = usersCol
 //Flush db before tests begin
 beforeEach ( () => {
   return flushDb()
@@ -36,7 +37,7 @@ describe('Add users', () => {
 
 describe('Remove users', () => {
   it('Remove unexisting user from empty db should be rejected', () =>
-    removeUser({username: 'avi'}).should.be.rejected)
+    removeUser('avi').should.be.rejected)
 
   it('Remove unexisting user from non-empty db should be rejected', () =>
     addUser({username: 'avi'}).should.be.fulfilled
@@ -64,7 +65,7 @@ describe('Remove users', () => {
 
 describe('Get users', () => {
   it('Get user from empty db should be rejected', () =>
-    getUser({username:'avi'}).should.be.rejected
+    getUser('avi').should.be.rejected
   )
 
   it('Add user, then get another user should be rejected', () =>

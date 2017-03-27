@@ -18,3 +18,6 @@ deb.js
 /public/src/dist
 /play_garbage
 /dist
+bundle.js
+db/*.js
+test/*.js
