@@ -1,5 +1,5 @@
 module.exports = {
-    entry: "./db/users.ts",
+    entry: "./index.ts",
     devtool:"eval",
     target: "node",
     output: {

@@ -2,7 +2,7 @@ import * as  _ from 'lodash'
 import { db } from './db';
 
 
-let errorCode = {
+export const errorCode = {
   USER_DOES_NOT_EXIST: {
     code: 0,
     description: "Requested user doesn't exist"

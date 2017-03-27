@@ -6,7 +6,7 @@ let url = 'mongodb://localhost:27017/hafifa'
 export class db {
   static dbInstance = null
   public static getInstance(): Promise<any> {
-    let dbInstance = this.dbInstance
+    let dbInstance = db.dbInstance
     if(dbInstance) {
       return Promise.resolve(dbInstance)
     }
@@ -19,7 +19,7 @@ export class db {
   }
 
   public static close(): void {
-    let dbInstance = this.dbInstance
+    let dbInstance = db.dbInstance
     if(dbInstance) {
       dbInstance.close()
       dbInstance = null
